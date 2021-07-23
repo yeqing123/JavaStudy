@@ -1,10 +1,10 @@
-package com.yeqing.foundation.introspector;
+package com.yeqing._02_introspector;
 
 import java.beans.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.yeqing.foundation.javabean.Person;
+import com.yeqing._01_javabean.Person;
 
 public class BeanUtils {
 

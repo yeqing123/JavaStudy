@@ -1,4 +1,5 @@
-package com.yeqing.foundation.javabean;
+package com.yeqing._01_javabean;
+
 
 public class Person {
     String name;
