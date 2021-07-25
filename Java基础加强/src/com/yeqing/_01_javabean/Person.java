@@ -1,30 +1,16 @@
 package com.yeqing._01_javabean;
 
+import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class Person {
-    String name;
-    Long id;
-    int age;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	@Override
-	public String toString() {
-		return "Person [name=" + name + ", id=" + id + ", age=" + age + "]";
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
+    private String name;
+    private Long id;
+    private int age;
+    private Date bornDate;
 }
