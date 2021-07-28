@@ -1,8 +1,6 @@
 package com.yeqing._03_dom;
 
 
-
-
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +22,7 @@ public class DomTest {
 	private File f = new File("D:/eclipse-jee-2020-03-R-incubation-win32-x86_64" +
 			"/eclipse/workspace/JavaFoundation/JUnit-XML-DOM-DOM4J/contacts.xml");
 	
+	// 需求：获得XML文档的Document对象
     @Test
 	public void testGetDocument() throws Exception {
     	// 使用工厂类的静态方法，获得工厂类的实例
@@ -36,6 +35,7 @@ public class DomTest {
     	System.out.println(doc);
 	}
     
+    // 需求：获得DOM树中根元素（contacts）下第二个（linkman）子元素
     @Test
 	public void testGetText() throws Exception {
     	// 使用工厂类的静态方法，获得工厂类的实例
@@ -59,23 +59,21 @@ public class DomTest {
     	Assert.assertEquals("李四", text);
 	}
     
+    // 需求：修改DOM树中根元素中第二个linkman资源中email元素的文本值，并执行同步操作保存到磁盘的XML文档中
     @Test
 	public void testSetText() throws Exception {
-    	// 使用工厂类的静态方法，获得工厂类的实例
+    	// 获得文档的Document对象
     	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    	// 依靠工厂类对象创建一个DocumentBuilder对象
     	DocumentBuilder builder = factory.newDocumentBuilder();
-    	// 使用DocumentBuilder对象的parse()方法，解析指定的XML文件，获得一个Document对象
     	Document doc = builder.parse(f);
     	// 获得文档的根元素（contacts）
     	Element root = doc.getDocumentElement();
-    	// 获得根元素中第二个联系人（linkeman子元素）
+    	// 获得根元素中第二个联系人（linkeman子元素）的email子元素
     	Element linkmanEl = (Element) root.getElementsByTagName("linkman").item(1);
-    	// 获取linkeman元素的email子元素
     	Element emailEl = (Element) linkmanEl.getElementsByTagName("name").item(0);
     	
     	//==============================================================================
-    	// 修改其文本内容
+    	// 修改email元素的文本内容
     	emailEl.setTextContent("88888888@qq.com");
     	
     	/*
@@ -93,5 +91,46 @@ public class DomTest {
     	Result result = new StreamResult(f);
     	transformer.transform(source, result);
     	//=============================================================================
+	}
+    
+    // 需求：向DOM树的根元素的所有子元素的末尾添加一个新的linkman子元素
+    //（linkman元素中还有name、email、address、group子元素，这其实是一个XML片段），并执行同步操作
+    @Test
+	public void testAddElement() throws Exception {
+		//1、获得文档的Document对象
+    	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    	DocumentBuilder builder = factory.newDocumentBuilder();
+    	Document doc = builder.parse(f);
+    	//2、获得根元素
+    	Element root = doc.getDocumentElement();
+    	//=======================================================================
+    	//3、创建一个新的XML片段
+    	//3.1、创建新的元素linkman、name、email、address、group
+    	Element linkmanEl = doc.createElement("linkman");
+    	Element nameEl = doc.createElement("name");
+    	Element emailEl = doc.createElement("email");
+    	Element addressEl = doc.createElement("address");
+    	Element groupEl = doc.createElement("group");
+    	//3.2、给linkman设置id属性，并设置name、email、address、group的文本内容
+    	linkmanEl.setAttribute("id", "3");
+    	nameEl.setTextContent("Lucy");
+    	emailEl.setTextContent("Lucy@y");
+    	addressEl.setTextContent("广州");
+    	groupEl.setTextContent("小码哥学院");
+    	//3.3、在新元素之间建立关系，即让name、email、address、group成为linkman的子元素
+    	linkmanEl.appendChild(nameEl);
+    	linkmanEl.appendChild(emailEl);
+    	linkmanEl.appendChild(addressEl);
+    	linkmanEl.appendChild(groupEl);
+    	//4、将新的XML片段加入到DOM树中，即让新的linkman元素成为根元素的子元素
+    	root.appendChild(linkmanEl);
+    	//=======================================================================
+    	
+    	//5、执行从Document对象到XML文档的同步操作
+    	TransformerFactory factory2 = TransformerFactory.newInstance();
+    	Transformer transformer = factory2.newTransformer();
+    	Source source = new DOMSource(doc);
+    	Result result = new StreamResult(f);
+    	transformer.transform(source, result);
 	}
 }
