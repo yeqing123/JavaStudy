@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><contacts>
+    <linkman id="1">
+        <name>张三</name>
+        <email>Will@sina.com</email>
+        <address>成都</address>
+        <group>阿里巴巴</group>
+    </linkman>
+    <linkman id="2">
+        <name>李四</name>
+        <email>88888888@qq.com</email>
+        <address>北京</address>
+        <group>小码哥科技公司</group>
+    </linkman>
+</contacts>
