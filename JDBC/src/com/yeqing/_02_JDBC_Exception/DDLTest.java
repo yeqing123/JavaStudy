@@ -77,4 +77,23 @@ public class DDLTest {
 		}
 	}
 	
+	//删除一个表
+	@Test
+	public void testDeleteTable() throws Exception {
+		//1,创建sql语句
+		String sql = "DROP TABLE t_students";
+		//2,加载并注册数据库驱动
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		//3,连接数据库
+		Connection conn = DriverManager.getConnection(
+				"jdbc:mysql://localhost:3306/jdbcdemo?ServerTimezone=Asia/Shanghai", 
+				"root", "mysqladmin");
+		//4,创建语句对象
+		Statement st = conn.createStatement();
+		//5，执行SQL语句
+		st.executeUpdate(sql);
+		//6，释放资源
+		st.close();
+		conn.close();
+	}
 }
