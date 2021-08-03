@@ -2,7 +2,6 @@ package com.yeqing._02_JDBC_Exception;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 import org.junit.Test;
@@ -12,7 +11,7 @@ public class DMLTest {
 	@Test
 	public void testInsert() throws Exception {
 		//1,创建SQL语句
-		String sql = "INSERT INTO t_students (name,age) VALUES ('西门吹雪', 28)";
+		String sql = "INSERT INTO t_students (name,age) VALUES ('陆小凤', 18)";
 		//2,//2,加载并注册数据库驱动
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		//3,连接数据库
@@ -24,34 +23,6 @@ public class DMLTest {
 		//5，执行SQL语句
 		System.out.println(st.executeUpdate(sql));
 		//6，释放资源
-		st.close();
-		conn.close();
-	}
-	
-	//需求：查询t_students表中所有数据
-	@Test
-	public void testQuery() throws Exception {
-		//1,创建SQL语句
-		String sql = "SELECT id, name, age FROM t_students";
-		//2,加载并注册数据库驱动
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		//3,连接数据库
-		Connection conn = DriverManager.getConnection(
-				"jdbc:mysql://localhost:3306/jdbcdemo?ServerTimezone=Asia/Shanghai", 
-				"root", "mysqladmin");
-		//4,创建语句对象
-		Statement st = conn.createStatement();
-		//5，执行SQL语句，获得查询结果的数据集
-		ResultSet rs = st.executeQuery(sql);
-		//6，遍历结果集，逐条打印数据
-		while(rs.next()) {
-			long id = rs.getLong(1);
-			String name = rs.getString(2);
-			int age = rs.getInt(3);
-			System.out.println("id:" + id + ", name:" + name + ", age:" + age);
-		}
-		//7,释放资源
-		rs.close();
 		st.close();
 		conn.close();
 	}

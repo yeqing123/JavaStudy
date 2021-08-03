@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 import org.junit.Test;
 
+//数据库操作的口诀：贾琏欲执事，五个步骤
 public class DDLTest {
     // 需求：使用JDBC在数据库jdbcdemo中创建一个表
 	@Test
