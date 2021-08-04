@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class MathTest {
 	
-    MathImp math = new MathImp();
+    MathImpl math = new MathImpl();
     
 	@Test
 	public void testAdd() {

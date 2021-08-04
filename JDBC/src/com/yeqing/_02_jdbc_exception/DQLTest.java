@@ -1,4 +1,4 @@
-package com.yeqing._02_JDBC_Exception;
+package com.yeqing._02_jdbc_exception;
 
 
 import java.sql.Connection;

@@ -1,6 +1,6 @@
 package com.yeqing._02_assert;
 
-public class MathImp implements IMath {
+public class MathImpl implements IMath {
     public int add(int a, int b) {
     	return a + b;
     }
