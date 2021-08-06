@@ -9,10 +9,11 @@ import java.util.List;
 
 import com.yeqing.dao.IProductDAO;
 import com.yeqing.domain.Product;
+import com.yeqing.util.JdbcUtil;
 
 public class ProductDAOImpl implements IProductDAO {
-
-	@Override
+    
+    @Override
 	public void save(Product p) {
 		// 拼接SQL语句
 		StringBuilder sb = new StringBuilder();
@@ -28,10 +29,8 @@ public class ProductDAOImpl implements IProductDAO {
 		Statement st = null;
 		try {
 			// 1,加载注册驱动
-			Class.forName("com.mysql.cj.jdbc.Driver");
 			// 2,连接数据库
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbcdemo?Timezone=Asia/Shanghai", "root",
-					"mysqladmin");
+			conn = JdbcUtil.getConn();
 			// 3,获得SQL语句对象
 			st = conn.createStatement();
 			// 4,执行SQL
@@ -65,10 +64,8 @@ public class ProductDAOImpl implements IProductDAO {
 		Statement st = null;
 		try {
 			// 1,加载注册驱动
-			Class.forName("com.mysql.cj.jdbc.Driver");
 			// 2,连接数据库
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbcdemo?Timezone=Asia/Shanghai", "root",
-					"mysqladmin");
+			conn = JdbcUtil.getConn();
 			// 3,获得SQL语句对象
 			st = conn.createStatement();
 			// 4,执行SQL
@@ -77,21 +74,7 @@ public class ProductDAOImpl implements IProductDAO {
 			e.printStackTrace();
 		}
 		// 5,释放资源
-		try {
-			if (st != null) {
-				st.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		JdbcUtil.close(conn, st, null);
 	}
 
 	@Override
@@ -109,10 +92,8 @@ public class ProductDAOImpl implements IProductDAO {
 		Statement st = null;
 		try {
 			// 1,加载注册驱动
-			Class.forName("com.mysql.cj.jdbc.Driver");
 			// 2,连接数据库
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbcdemo?Timezone=Asia/Shanghai", "root",
-					"mysqladmin");
+			conn = JdbcUtil.getConn();
 			// 3,获得SQL语句对象
 			st = conn.createStatement();
 			// 4,执行SQL
@@ -121,21 +102,7 @@ public class ProductDAOImpl implements IProductDAO {
 			e.printStackTrace();
 		}
 		// 5,释放资源
-		try {
-			if (st != null) {
-				st.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		JdbcUtil.close(conn, st, null);
 	}
 
 	@Override
@@ -147,10 +114,8 @@ public class ProductDAOImpl implements IProductDAO {
 		ResultSet rs = null;
 		try {
 			// 1,加载注册驱动
-			Class.forName("com.mysql.cj.jdbc.Driver");
 			// 2,连接数据库
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbcdemo?Timezone=Asia/Shanghai", "root",
-					"mysqladmin");
+			conn = JdbcUtil.getConn();
 			// 3,获得SQL语句对象
 			st = conn.createStatement();
 			// 4,执行SQL
@@ -171,29 +136,7 @@ public class ProductDAOImpl implements IProductDAO {
 			e.printStackTrace();
 		}
 		// 5,释放资源
-		try {
-			if (rs != null) {
-				rs.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (st != null) {
-					st.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					if (conn != null) {
-						conn.close();
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		JdbcUtil.close(conn, st, rs);
 		return null;
 	}
 
@@ -207,10 +150,8 @@ public class ProductDAOImpl implements IProductDAO {
 		List<Product> list = new ArrayList();
 		try {
 			// 1,加载注册驱动
-			Class.forName("com.mysql.cj.jdbc.Driver");
 			// 2,连接数据库
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbcdemo?Timezone=Asia/Shanghai", "root",
-					"mysqladmin");
+			conn = JdbcUtil.getConn();
 			// 3,获得SQL语句对象
 			st = conn.createStatement();
 			// 4,执行SQL
@@ -231,29 +172,7 @@ public class ProductDAOImpl implements IProductDAO {
 			e.printStackTrace();
 		}
 		// 5,释放资源
-		try {
-			if (rs != null) {
-				rs.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (st != null) {
-					st.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					if (conn != null) {
-						conn.close();
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		JdbcUtil.close(conn, st, rs);
 		return list;
 	}
 

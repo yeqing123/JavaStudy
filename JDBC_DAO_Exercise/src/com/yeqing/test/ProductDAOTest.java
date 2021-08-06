@@ -11,10 +11,10 @@ public class ProductDAOTest {
 	@Test
 	public void testSave() {
 		Product p = new Product();
-		p.setName("光盘");
-		p.setNote("用于存储数据");
-		p.setPrice(5.0D);
-		p.setCount(100);
+		p.setName("键盘");
+		p.setNote("用于输入数据");
+		p.setPrice(100.0D);
+		p.setCount(10);
 		p.setTypes_id(2);
 		p.setSubtypes_id(8);
 		productDAO.save(p);
@@ -22,19 +22,19 @@ public class ProductDAOTest {
 
 	@Test
 	public void testDelete() {
-		productDAO.delete(100L);
+		productDAO.delete(102L);
 	}
 
 	@Test
 	public void testUpdate() {
 		Product p = new Product();
-		p.setName("篮球");
-		p.setNote("结实耐用，品质保障");
-		p.setPrice(200.0D);
+		p.setName("鼠标");
+		p.setNote("激光鼠标");
+		p.setPrice(20.0D);
 		p.setCount(10);
-		p.setTypes_id(3);
-		p.setSubtypes_id(9);
-		productDAO.update(30L, p);
+		p.setTypes_id(2);
+		p.setSubtypes_id(8);
+		productDAO.update(103L, p);
 	}
 
 	@Test
