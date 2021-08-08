@@ -1,23 +1,26 @@
 package com.yeqing.util;
 
-import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 // JDBC工具类
 public class JdbcUtil {
 	
 	private static Properties p = new Properties();
+	private static DataSource ds = null;  // 使用连接池
 	static {
 		try {
-			//获得配置文件的输入流
-			InputStream inStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties");
+			Properties p = new Properties();
 			// 加载配置文件
-			p.load(inStream);
-			Class.forName(p.getProperty("driverClassName"));
+			p.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties"));
+			//基于阿里巴巴的Druid，获得连接池对象
+			ds = DruidDataSourceFactory.createDataSource(p);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -25,8 +28,7 @@ public class JdbcUtil {
 
 	public static Connection getConn() {
 		try {
-			return DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"),
-					p.getProperty("password"));
+			return ds.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

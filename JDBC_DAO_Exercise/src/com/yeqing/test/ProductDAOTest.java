@@ -32,9 +32,9 @@ public class ProductDAOTest {
 		p.setNote("激光鼠标");
 		p.setPrice(20.0D);
 		p.setCount(10);
-		p.setTypes_id(2);
+		p.setTypes_id(3);
 		p.setSubtypes_id(8);
-		productDAO.update(103L, p);
+		productDAO.update(102L, p);
 	}
 
 	@Test

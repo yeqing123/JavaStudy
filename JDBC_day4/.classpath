@@ -6,6 +6,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.18.jar" sourcepath="lib/mysql-connector-java-8.0.18.jar"/>
+	<classpathentry kind="lib" path="lib/druid-1.1.22.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
