@@ -13,27 +13,27 @@ public class StudentDAOTest {
 	@Test
 	public void testSave() {
 		Student stu = new Student();
-		stu.setName("乔峰");
-		stu.setAge(30);
+		stu.setName("西门吹雪");
+		stu.setAge(26);
 		studentDAO.save(stu);
 	}
 
 	@Test
 	public void testDelete() {
-		studentDAO.delete(64426L);
+		studentDAO.delete(64427L);
 	}
 
 	@Test
 	public void testUpdate() {
 		Student stu = new Student();
-		stu.setName("陆小凤");
-		stu.setAge(28);
-		studentDAO.update(64429L, stu);
+		stu.setName("司空摘星");
+		stu.setAge(32);
+		studentDAO.update(64428L, stu);
 	}
 
 	@Test
 	public void testGet() {
-		Student stu = studentDAO.get(1L);
+		Student stu = studentDAO.get(64428L);
 		System.out.println(stu);
 	}
 

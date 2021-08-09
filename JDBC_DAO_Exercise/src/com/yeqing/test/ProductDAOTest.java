@@ -22,7 +22,7 @@ public class ProductDAOTest {
 
 	@Test
 	public void testDelete() {
-		productDAO.delete(102L);
+		productDAO.delete(103L);
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class ProductDAOTest {
 		p.setCount(10);
 		p.setTypes_id(3);
 		p.setSubtypes_id(8);
-		productDAO.update(102L, p);
+		productDAO.update(104L, p);
 	}
 
 	@Test

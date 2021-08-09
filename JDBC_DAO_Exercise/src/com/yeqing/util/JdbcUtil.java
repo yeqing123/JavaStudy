@@ -26,7 +26,7 @@ public class JdbcUtil {
 		}
 	}
 
-	public static Connection getConn() {
+	public static Connection getConnection() {
 		try {
 			return ds.getConnection();
 		} catch (Exception e) {

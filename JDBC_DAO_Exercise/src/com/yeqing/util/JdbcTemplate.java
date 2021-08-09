@@ -1,4 +1,4 @@
-package com.yeqing.jdbc.util;
+package com.yeqing.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
