@@ -1,8 +1,13 @@
 package com.yeqing.jdbc.dao.impl;
 
 import java.util.List;
+
 import com.yeqing.jdbc.dao.IStudentDAO;
 import com.yeqing.jdbc.domain.Student;
+import com.yeqing.jdbc.domain.Student2;
+import com.yeqing.jdbc.handler.BeanHandler;
+import com.yeqing.jdbc.handler.BeanListHandler;
+import com.yeqing.jdbc.handler.IResultSetHandler;
 import com.yeqing.jdbc.util.JdbcTemplate;
 
 // 永远记住，操作数据库的5个步骤：贾琏欲执事
@@ -18,12 +23,13 @@ public class StudentDAOImpl implements IStudentDAO {
 		JdbcTemplate.update("UPDATE t_students SET name = ?, age = ? WHERE id = ?", 
 				newStu.getName(), newStu.getAge(), id);
 	}
-	public Student get(Long id) {
-		List<Student> list = JdbcTemplate.query("SELECT * FROM t_students WHERE id = ?", 
-				Student.class, id);
-		return list.size() == 1 ? list.get(0) : null;
+	public Student2 get(Long id) {
+		IResultSetHandler<Student2> handler = new BeanHandler<>(Student2.class);
+		return JdbcTemplate.query("SELECT * FROM t_students WHERE id = ?", 
+				handler, id);
 	}
 	public List<Student> listAll() {
-		return JdbcTemplate.query("SELECT * FROM t_students", Student.class);
+		IResultSetHandler<List<Student>> handler = new BeanListHandler<>(Student.class);
+		return JdbcTemplate.query("SELECT * FROM t_students", handler);
 	}
 }
