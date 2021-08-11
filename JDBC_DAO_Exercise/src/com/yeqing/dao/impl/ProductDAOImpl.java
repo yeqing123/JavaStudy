@@ -1,9 +1,12 @@
 package com.yeqing.dao.impl;
 
 import java.util.List;
+
 import com.yeqing.dao.IProductDAO;
 import com.yeqing.domain.Product;
-import com.yeqing.util.JdbcTemplate;
+import com.yeqing.jdbc.handler.EnhancedBeanHandler;
+import com.yeqing.jdbc.handler.EnhancedBeanListHandler;
+import com.yeqing.jdbc.util.JdbcTemplate;
 
 public class ProductDAOImpl implements IProductDAO {
 
@@ -34,14 +37,13 @@ public class ProductDAOImpl implements IProductDAO {
 	@Override
 	public Product get(Long pid) {
 		String sql = "SELECT * FROM product WHERE pid = ?";
-		List<Product> list = JdbcTemplate.query(sql, Product.class, pid);
-		return list.size() == 1 ? list.get(0) : null;
+		return JdbcTemplate.query(sql, new EnhancedBeanHandler<Product>(Product.class), pid);
 	}
 
 	@Override
 	public List<Product> getAll() {
 		String sql = "SELECT * FROM product";
-		return JdbcTemplate.query(sql, Product.class);
+		return JdbcTemplate.query(sql, new  EnhancedBeanListHandler<Product>(Product.class));
 	}
 
 }

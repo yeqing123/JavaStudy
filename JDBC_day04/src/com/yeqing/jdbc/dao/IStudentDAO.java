@@ -27,10 +27,10 @@ public interface IStudentDAO {
 	 * @param id  被查询的学生的ID值
 	 * @return  返回封装学生信息的对象
 	 */
-	Student2 get(Long id);
+	Student get(Long id);
 	/**
 	 * 查询所有学生的信息
 	 * @return 返回包含所有信息对象的集合
 	 */
-	List<Student> listAll();
+	List<Student2> listAll();
 }

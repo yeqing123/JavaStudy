@@ -38,14 +38,14 @@ public class StudentDAOTest {
 
 	@Test
 	public void testGet() {
-		Student2 stu = studentDAO.get(3L);
+		Student stu = studentDAO.get(64428L);
 		System.out.println(stu);
 	}
 
 	@Test
 	public void testListAll() {
-		List<Student> list = studentDAO.listAll();
-		for (Student student : list) {
+		List<Student2> list = studentDAO.listAll();
+		for (Student2 student : list) {
 			System.out.println(student);
 		}
 	}
