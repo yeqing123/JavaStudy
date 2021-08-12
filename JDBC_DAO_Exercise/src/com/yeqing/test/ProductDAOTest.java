@@ -28,13 +28,13 @@ public class ProductDAOTest {
 	@Test
 	public void testUpdate() {
 		Product p = new Product();
-		p.setName("鼠标");
-		p.setNote("激光鼠标");
-		p.setPrice(20.0D);
+		p.setName("键盘");
+		p.setNote("机械键盘");
+		p.setPrice(500.0D);
 		p.setCount(10);
 		p.setTypes_id(3);
 		p.setSubtypes_id(8);
-		productDAO.update(104L, p);
+		productDAO.update(102L, p);
 	}
 
 	@Test

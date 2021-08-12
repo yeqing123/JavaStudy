@@ -9,7 +9,6 @@ import org.junit.Test;
 import com.yeqing.jdbc.dao.IStudentDAO;
 import com.yeqing.jdbc.dao.impl.StudentDAOImpl;
 import com.yeqing.jdbc.domain.Student;
-import com.yeqing.jdbc.domain.Student2;
 import com.yeqing.jdbc.handler.IResultSetHandler;
 import com.yeqing.jdbc.util.JdbcTemplate;
 
@@ -18,34 +17,34 @@ public class StudentDAOTest {
 	@Test
 	public void testSave() {
 		Student stu = new Student();
-		stu.setName("西门吹雪");
-		stu.setAge(26);
+		stu.setName("阿紫");
+		stu.setAge(23);
 		studentDAO.save(stu);
 	}
 
 	@Test
 	public void testDelete() {
-		studentDAO.delete(64427L);
+		studentDAO.delete(64425L);
 	}
 
 	@Test
 	public void testUpdate() {
 		Student stu = new Student();
-		stu.setName("司空摘星");
-		stu.setAge(32);
-		studentDAO.update(64428L, stu);
+		stu.setName("AAA");
+		stu.setAge(29);
+		studentDAO.update(64436L, stu);
 	}
 
 	@Test
 	public void testGet() {
-		Student stu = studentDAO.get(64428L);
+		Student stu = studentDAO.get(64434L);
 		System.out.println(stu);
 	}
 
 	@Test
 	public void testListAll() {
-		List<Student2> list = studentDAO.listAll();
-		for (Student2 student : list) {
+		List<Student> list = studentDAO.listAll();
+		for (Student student : list) {
 			System.out.println(student);
 		}
 	}

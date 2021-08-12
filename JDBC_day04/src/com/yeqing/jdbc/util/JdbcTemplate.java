@@ -3,7 +3,6 @@ package com.yeqing.jdbc.util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
 
 import com.yeqing.jdbc.handler.IResultSetHandler;
 

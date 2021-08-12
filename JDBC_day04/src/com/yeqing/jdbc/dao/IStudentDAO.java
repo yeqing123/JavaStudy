@@ -3,7 +3,6 @@ package com.yeqing.jdbc.dao;
 import java.util.List;
 
 import com.yeqing.jdbc.domain.Student;
-import com.yeqing.jdbc.domain.Student2;
 
 public interface IStudentDAO {
     /**
@@ -32,5 +31,5 @@ public interface IStudentDAO {
 	 * 查询所有学生的信息
 	 * @return 返回包含所有信息对象的集合
 	 */
-	List<Student2> listAll();
+	List<Student> listAll();
 }

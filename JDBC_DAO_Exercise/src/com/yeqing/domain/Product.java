@@ -2,11 +2,14 @@ package com.yeqing.domain;
 
 
 
+import com.yeqing.jdbc.ann.Id;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter@Setter
 public class Product {
+	@Id
 	private Long pid;      // 货品的id
     private String name;   // 货品的名称
     private String note;   // 货品的简介
