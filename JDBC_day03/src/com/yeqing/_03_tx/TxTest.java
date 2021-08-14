@@ -1,6 +1,5 @@
 package com.yeqing._03_tx;
 
-import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
