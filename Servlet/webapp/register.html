@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>注册页面</h1>
+    <form action="/servlet/reg" method="POST">
+                姓名：<input type="text" name="username"/><br/>
+                密码：<input type="password" name="password"/><br/>
+               性别：<input type="radio" name="gender" value="boy" checked>男
+          <input type="radio" name="gender" value="girl">女<br/>
+                爱好：<input type="checkbox" name="hobby" value="java">Java 
+          <input type="checkbox" name="hobby" value="c">c 
+          <input type="checkbox" name="hobby" value="music">音乐<br/>
+               城市： <select name="city">
+              <option value="gz">广州     
+              <option value="cd">成都     
+              <option value="xa">西安     
+          </select><br/>        
+               介绍： <textarea name="intro" cols="30" rows="10"></textarea>
+       <input type="submit" value="朕要注册"/>
+     </form>
+</body>
+</html>
