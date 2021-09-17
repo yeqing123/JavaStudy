@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<uncheckRequestUri>
+	<uncheckUri>/login.jsp</uncheckUri>
+	<uncheckUri>/login</uncheckUri>
+	<uncheckUri>/forum.jsp</uncheckUri>
+	<uncheckUri>/deliver</uncheckUri>
+	<uncheckUri>/show</uncheckUri>
+	<uncheckUri>/show.jsp</uncheckUri>
+</uncheckRequestUri>
