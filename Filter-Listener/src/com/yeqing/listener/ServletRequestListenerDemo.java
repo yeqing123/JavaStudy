@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 public class ServletRequestListenerDemo implements ServletRequestListener {
 
 	public void requestDestroyed(ServletRequestEvent sre) {
-		System.out.println("销毁请求对象:" + sre.getServletRequest().toString());
-		System.out.println("========================================");
+//		System.out.println("销毁请求对象:" + sre.getServletRequest().toString());
+//		System.out.println("========================================");
 	}
 
 	public void requestInitialized(ServletRequestEvent sre) {
-		System.out.println("创建请求对象:" + sre.getServletRequest().toString());
+//		System.out.println("创建请求对象:" + sre.getServletRequest().toString());
 	}
 
 }

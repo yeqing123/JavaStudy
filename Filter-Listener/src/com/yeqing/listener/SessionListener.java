@@ -9,13 +9,13 @@ import javax.servlet.http.HttpSessionListener;
 @WebListener
 public class SessionListener implements HttpSessionListener {
 	public void sessionCreated(HttpSessionEvent se) {
-		System.out.println("创建会话（session）对象:" + se.getSession().toString());
+//		System.out.println("创建会话（session）对象:" + se.getSession().toString());
 		
 	}
 
 	public void sessionDestroyed(HttpSessionEvent se) {
-		System.out.println("销毁会话（session）对象:" + se.getSession().toString());
-		System.out.println("===================================");
+//		System.out.println("销毁会话（session）对象:" + se.getSession().toString());
+//		System.out.println("===================================");
 	}
 
 }

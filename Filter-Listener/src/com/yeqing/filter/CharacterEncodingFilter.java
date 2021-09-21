@@ -17,22 +17,22 @@ public class CharacterEncodingFilter implements Filter {
 
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
-		String requestEncoding = req.getCharacterEncoding();
-		String responseEncoding = resp.getContentType();
-		//设置请求的字符编码
-		if(!hasLength(encoding) && (requestEncoding == null || forceEncoding)) {
-			req.setCharacterEncoding("UTF-8");
-		}
-		//响应的字符编码
-		if(responseEncoding == null && forceEncoding) {
-			resp.setContentType("text/html;charset=utf-8");
-		}
-    	chain.doFilter(req, resp);
+//		String requestEncoding = req.getCharacterEncoding();
+//		String responseEncoding = resp.getContentType();
+//		//设置请求的字符编码
+//		if(!hasLength(encoding) && (requestEncoding == null || forceEncoding)) {
+//			req.setCharacterEncoding("UTF-8");
+//		}
+//		//响应的字符编码
+//		if(responseEncoding == null && forceEncoding) {
+//			resp.setContentType("text/html;charset=utf-8");
+//		}
+//    	chain.doFilter(req, resp);
 	}
 
 	public void init(FilterConfig config) throws ServletException {
-		this.encoding = config.getInitParameter("encoding");
-		this.forceEncoding = Boolean.valueOf(config.getInitParameter("force"));
+//		this.encoding = config.getInitParameter("encoding");
+//		this.forceEncoding = Boolean.valueOf(config.getInitParameter("force"));
 	}
     private boolean hasLength(String str) {
     	return str != null && !"".equals(str.trim());

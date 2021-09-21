@@ -9,7 +9,20 @@
 </head>
 <body>
     <h2>商品信息列表：</h2>
-    <a href="/product?cmd=edit">添加商品信息</a>
+    <form action="/product" method="post">
+    	商品名称：<input type="text" name="name" value="${qo.name}"/>
+    	商品简介：<input type="text" name="note" value="${qo.note}"/>
+    	价格区间：<input type="number" name="minprice" style="width:80px;" value="${qo.minprice}"/>
+    		到<input type="number" name="note" style="width:80px;" value="${qo.maxprice}"/>
+                    商品分类：<select name="dir">
+               		<option value="-1">所有分类</option>
+               		<c:forEach items="${dirs}" var="d">
+               			<option value="${d.id}" ${qo.dir==d.id?"selected":""}>${d.dirName}</option>
+               		</c:forEach> 
+               </select>
+                    关键字：<input type="text" name="keyword" placeholder="商品名称或商品简介" value="${qo.keyword}"/>
+    		<input type="submit" value="查询"/>
+    </form>
     <table border="1" width="80%" cellpadding="10" cellspacing="0">
     	<tr style="background-color:orange">
     		<th>编号</th>
@@ -18,8 +31,6 @@
     		<th>价格</th>
     		<th>数量</th>
     		<th>所属目录</th>
-    		<th>所属子目录</th>
-    		<th colspan="2">操作</th>
     	</tr>
     	<c:forEach items="${products}" var="p" varStatus="vs">
 	    	<tr style="background-color:${vs.count%2==0?'gray':''}">
@@ -33,13 +44,6 @@
 		    	    	${p.dir==d.id?d.dirName:""}
 		    	    </c:forEach>
 	    	    </td>
-	    	    <td>
-	    	    	<c:forEach items="${subDirs}" var="sd">
-	    	    		${p.subDir==sd.id?sd.subDirName:""}
-	    	    	</c:forEach>
-				</td>
-	    	    <td style="text-aglin:center"><a href="/product?cmd=delete&id=${p.id}">删除</a></td>
-	    	    <td style="text-aglin:center"><a href="/product?cmd=edit&id=${p.id}">编辑</a></td>
 	    	</tr>
     	</c:forEach>
     </table>

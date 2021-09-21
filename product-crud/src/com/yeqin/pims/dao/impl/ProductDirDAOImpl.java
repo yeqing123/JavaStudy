@@ -4,29 +4,21 @@ import java.util.List;
 
 import com.yeqin.pims.dao.IProductDirDAO;
 import com.yeqin.pims.domain.ProductDir;
-import com.yeqin.pims.util.MyHibernate;
+import com.yeqin.pims.query.ProductDirQueryObject;
+import com.yeqin.pims.util.JdbcTemplate;
+import com.yeqin.pims.util.handler.BeanListHandler;
 
 public class ProductDirDAOImpl implements IProductDirDAO {
-   //使用自定义的MyHibernate工具类，将是接口实现类的实现方法变得非常简单	
-    private MyHibernate<ProductDir> h = new MyHibernate<>(ProductDir.class);
-	public void save(ProductDir obj) {
-        h.save(obj);
-	}
-
-	public void delete(Long id) {
-		h.delete(id);
-	}
-
-	public void update(ProductDir obj) {
-		h.update(obj);
-	}
-
-	public ProductDir get(Long id) {
-		return h.get(id);
-	}
 
 	public List<ProductDir> listAll() {
-		return h.getAll();
+		String sql = "SELECT * FROM product_dir";
+		return JdbcTemplate.query(sql, new BeanListHandler<ProductDir>(ProductDir.class));
+	}
+
+	@Override
+	public List<ProductDir> query(ProductDirQueryObject qo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

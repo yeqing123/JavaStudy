@@ -7,4 +7,5 @@
 	<uncheckUri>/deliver</uncheckUri>
 	<uncheckUri>/show</uncheckUri>
 	<uncheckUri>/show.jsp</uncheckUri>
+	<uncheckUri>/product</uncheckUri>
 </uncheckRequestUri>

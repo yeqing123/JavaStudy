@@ -9,11 +9,11 @@ import javax.servlet.annotation.WebListener;
 public class ContextLoadListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent sce) {
-		System.out.println("Web系统启动了...");
+	//	System.out.println("Web系统启动了...");
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
-		System.out.println("Web系统关闭了...");
+	//	System.out.println("Web系统关闭了...");
 	}
 
 }
