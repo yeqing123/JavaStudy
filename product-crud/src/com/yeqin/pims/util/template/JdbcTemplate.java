@@ -1,10 +1,11 @@
-package com.yeqin.pims.util;
+package com.yeqin.pims.util.template;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.yeqin.pims.util.handler.IResultSetHandler;
+import com.yeqin.pims.util.JdbcUtil_druid;
+import com.yeqin.pims.util.template.handler.IResultSetHandler;
 
 //完成数据库操作的模板类（永远记住基本流程：贾琏欲执事）
 public class JdbcTemplate {

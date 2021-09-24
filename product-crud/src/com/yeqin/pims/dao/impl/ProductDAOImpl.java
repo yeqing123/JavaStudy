@@ -2,26 +2,20 @@ package com.yeqin.pims.dao.impl;
 
 import java.util.List;
 
-
 import com.yeqin.pims.dao.IProductDAO;
 import com.yeqin.pims.domain.Product;
-import com.yeqin.pims.query.ProductQueryObject;
-import com.yeqin.pims.util.JdbcTemplate;
-import com.yeqin.pims.util.handler.BeanListHandler;
+import com.yeqin.pims.page.PageResult;
+import com.yeqin.pims.query.IQuery;
 
-public class ProductDAOImpl implements IProductDAO {
+@SuppressWarnings("unchecked")
+public class ProductDAOImpl extends BaseQuery implements IProductDAO {
 
 	public List<Product> listAll() {
-		String sql = "SELECT * FROM product";
-		return JdbcTemplate.query(sql, new BeanListHandler<Product>(Product.class));
+		return (List<Product>) super.listAll(Product.class);
 	}
 
-	public List<Product> query(ProductQueryObject qo) {
-		String sql = "SELECT * FROM product";
-		sql += qo.getQuery();
-		System.out.println("SQL: " + sql);
-		System.out.println("参数：" + qo.getParameters());
-		return JdbcTemplate.query(sql.toString(), new BeanListHandler<Product>(Product.class), qo.getParameters().toArray());
+	public PageResult query(IQuery qo) {
+		return super.query(Product.class, qo);
 	}
 
 }

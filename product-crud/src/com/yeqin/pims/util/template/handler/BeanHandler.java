@@ -1,11 +1,11 @@
-package com.yeqin.pims.util.handler;
+package com.yeqin.pims.util.template.handler;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSet;
 
-import com.yeqin.pims.util.ann.ColumnName;
+import com.yeqin.pims.ann.ColumnName;
 
 //结果集处理器，返回一个封装了一条信息的对象
 public class BeanHandler<T> implements IResultSetHandler<T> {

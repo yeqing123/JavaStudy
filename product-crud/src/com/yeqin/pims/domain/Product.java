@@ -2,13 +2,15 @@ package com.yeqin.pims.domain;
 
 import java.math.BigDecimal;
 
-import com.yeqin.pims.util.ann.ColumnName;
-import com.yeqin.pims.util.ann.Id;
-import com.yeqin.pims.util.ann.IdType;
+import com.yeqin.pims.ann.ColumnName;
+import com.yeqin.pims.ann.Id;
+import com.yeqin.pims.ann.IdType;
+import com.yeqin.pims.ann.Table;
 
 import lombok.Data;
 
 @Data
+@Table("product")
 public class Product {
 	@ColumnName("pid")
 	@Id(IdType.AUTO_INCREMENT)

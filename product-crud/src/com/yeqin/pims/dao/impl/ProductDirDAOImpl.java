@@ -4,21 +4,18 @@ import java.util.List;
 
 import com.yeqin.pims.dao.IProductDirDAO;
 import com.yeqin.pims.domain.ProductDir;
-import com.yeqin.pims.query.ProductDirQueryObject;
-import com.yeqin.pims.util.JdbcTemplate;
-import com.yeqin.pims.util.handler.BeanListHandler;
+import com.yeqin.pims.page.PageResult;
+import com.yeqin.pims.query.IQuery;
 
-public class ProductDirDAOImpl implements IProductDirDAO {
+@SuppressWarnings("unchecked")
+public class ProductDirDAOImpl extends BaseQuery implements IProductDirDAO {
 
 	public List<ProductDir> listAll() {
-		String sql = "SELECT * FROM product_dir";
-		return JdbcTemplate.query(sql, new BeanListHandler<ProductDir>(ProductDir.class));
+		return (List<ProductDir>) super.listAll(ProductDir.class);
 	}
 
-	@Override
-	public List<ProductDir> query(ProductDirQueryObject qo) {
-		// TODO Auto-generated method stub
-		return null;
+	public PageResult query(IQuery qo) {
+		return super.query(ProductDir.class, qo);
 	}
 
 }

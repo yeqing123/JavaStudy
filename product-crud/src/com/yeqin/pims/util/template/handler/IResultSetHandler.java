@@ -1,4 +1,4 @@
-package com.yeqin.pims.util.handler;
+package com.yeqin.pims.util.template.handler;
 
 import java.sql.ResultSet;
 
@@ -9,5 +9,5 @@ public interface IResultSetHandler<T> {
      * @param rs
      * @return
      */
-	T handler(ResultSet rs);
+	T handler(ResultSet rs) throws Exception;
 }

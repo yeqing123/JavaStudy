@@ -1,4 +1,4 @@
-package com.yeqin.pims.util.handler;
+package com.yeqin.pims.util.template.handler;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yeqin.pims.util.ann.ColumnName;
+import com.yeqin.pims.ann.ColumnName;
 
 
 //结果姐处理器，返回包含了封装了多条信息的对象的List集合
