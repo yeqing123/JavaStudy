@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeqing.mybatis.hello.UserMapper">
+    <!-- 查询单个数据 -->
+	<select id="get" parameterType="long" resultType="User">
+		SELECT id,name,salary FROM t_user WHERE id = #{id}
+	</select>
+
+    <!-- 查询所有数据 -->
+	<select id="listAll" resultType="User">
+		SELECT id,name,salary FROM t_user
+	</select>
+	
+	<!-- 新增数据 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="user">
+		INSERT INTO t_user (name,salary) VALUES (#{name},#{salary})
+	</insert>
+	
+	<!-- 删除指定数据 -->
+	<delete id="delete" parameterType="long">
+		DELETE FROM t_user WHERE id = #{id}
+	</delete>
+	
+	<!-- 修改指定数据 -->
+	<update id="update" parameterType="User">
+		UPDATE t_user SET name=#{name},salary=#{salary} WHERE id=#{id}
+	</update>
+</mapper>
