@@ -2,6 +2,7 @@ package com.yeqing.mybatis.hello;
 
 import java.math.BigDecimal;
 
+
 import lombok.Data;
 
 @Data

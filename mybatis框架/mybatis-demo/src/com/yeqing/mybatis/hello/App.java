@@ -4,6 +4,7 @@ package com.yeqing.mybatis.hello;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -58,5 +59,29 @@ public class App {
 		session.update("com.yeqing.mybatis.hello.UserMapper.update", u);
 		session.commit();
 		session.close();
+	}
+	@Test
+	public void testCount() throws Exception {
+		SqlSession session = null;
+		try {
+			session = MybatisUtil.getSession();
+			int count = session.selectOne("com.yeqing.mybatis.hello.UserMapper.queryCount");
+			System.out.println("数据库mybatisdemo中一共有" + count + "条数据");
+		} finally {
+			session.close();
+		}
+	}
+	@Test
+	public void testQueryMap() throws Exception {
+		SqlSession session = null;
+		try {
+			session = MybatisUtil.getSession();
+			List<Map<String,Object>> list  = session.selectList("com.yeqing.mybatis.hello.UserMapper.queryMap");
+			for (Map<String, Object> map : list) {
+				System.out.println(map);
+			}
+		} finally {
+			session.close();
+		}
 	}
 }
