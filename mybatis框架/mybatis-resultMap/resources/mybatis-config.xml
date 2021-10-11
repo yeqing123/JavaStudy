@@ -10,6 +10,7 @@
     	<setting name="logImpl" value="LOG4J"></setting>
     </settings>
     
+    <!-- 配置一个resultMap -->
 	<!-- 设置别名 -->
 	<typeAliases>
 		<package name="com.yeqing.mybatis.hello"/>

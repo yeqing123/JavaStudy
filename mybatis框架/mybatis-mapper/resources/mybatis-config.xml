@@ -31,6 +31,6 @@
 	</environments>
 	<!-- 配置映射器 -->
 	<mappers>
-		<mapper resource="com/yeqing/mybatis/hello/UserMapper.xml"/>
+		<mapper resource="com/yeqing/mybatis/hello/domain/UserMapper.xml"/>
 	</mappers>
 </configuration>

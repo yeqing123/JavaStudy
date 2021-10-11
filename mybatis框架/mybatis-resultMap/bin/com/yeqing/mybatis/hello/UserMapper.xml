@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeqing.mybatis.hello.UserMapper">
+
+	<!-- 如果数据库中的列名与对象属性名不一致，可以在SQL中为列名设置别名，但是更推荐使用resultMap元素建立映射关系 -->
+	<resultMap type="User" id="userResultMap">
+		<id column="u_id" property="id"/>
+		<result column="u_name" property="name"/>
+		<result column="u_salary" property="salary"/>
+	</resultMap>
+	
+    <!-- 查询单个数据 -->
+	<select id="get" parameterType="long" resultMap="userResultMap">
+		SELECT u_id,u_name,u_salary FROM t_user WHERE u_id = #{id}
+	</select>
+
+    <!-- 查询所有数据 -->
+	<select id="listAll" resultMap="userResultMap">
+		SELECT u_id,u_name,u_salary FROM t_user
+	</select>
+</mapper>

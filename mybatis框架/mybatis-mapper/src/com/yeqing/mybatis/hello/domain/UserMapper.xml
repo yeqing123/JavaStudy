@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeqing.mybatis.hello.mapper.UserMapper">
+    <!-- 查询单个数据 -->
+	<select id="get" parameterType="long" resultType="User">
+		SELECT id,name,salary FROM t_user WHERE id = #{id}
+	</select>
+
+    <!-- 查询所有数据 -->
+	<select id="listAll" resultType="User">
+		SELECT id,name,salary FROM t_user
+	</select>
+	
+	<!-- 新增数据 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="user">
+		INSERT INTO t_user (name,salary) VALUES (#{name},#{salary})
+	</insert>
+	
+	<!-- 删除指定数据 -->
+	<delete id="delete" parameterType="long">
+		DELETE FROM t_user WHERE id = #{id}
+	</delete>
+	
+	<!-- 修改指定数据 -->
+	<update id="update" parameterType="User">
+		UPDATE t_user SET name=#{name},salary=#{salary} WHERE id=#{id}
+	</update>
+	
+	<!-- 查询数据库中的数据量 -->
+	<select id="queryCount" resultType="int">
+		SELECT COUNT(id) FROM t_user;
+	</select>
+	
+	<!-- 查询数据库中指定两列的信息，并设置列的别名 。然后将每一行数据都封装成一个Map集合-->
+	<select id="queryMap" resultType="map">
+		SELECT id AS uid,name AS uname FROM t_user;
+	</select>
+</mapper>

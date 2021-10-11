@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
 <configuration>
+	<properties resource="db.properties"/>
     <!-- 配置日志 -->
     <settings>
     	<setting name="logImpl" value="LOG4J"></setting>
@@ -21,10 +22,10 @@
 			<transactionManager type="JDBC"></transactionManager>
 			<!-- 配置连接池，并设置连接四要素 -->
 			<dataSource type="POOLED">
-				<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-				<property name="url" value="jdbc:mysql://localhost:3306/mybatisdemo"/>
-				<property name="username" value="root"/>
-				<property name="password" value="mysqladmin"/>
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.url}"/>
+				<property name="username" value="${jdbc.username}"/>
+				<property name="password" value="${jdbc.password}"/>
 			</dataSource>
 		</environment>
 	</environments>
