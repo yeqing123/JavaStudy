@@ -2,7 +2,6 @@ package com.yeqing.mybatis.hello.domain;
 
 import java.math.BigDecimal;
 
-
 import lombok.Data;
 
 @Data
