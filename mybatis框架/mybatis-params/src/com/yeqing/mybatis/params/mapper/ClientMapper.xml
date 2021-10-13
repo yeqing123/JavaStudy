@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yeqing.mybatis.params.mapper.ClientMapper">
+	<!-- 登录操作，其实就是个多条件的查询操作 -->
+    <!-- 方式一： -->
+    <select id="login1" parameterType="LoginVO" resultType="Client">
+    	SELECT id,username,password FROM client WHERE username = #{username} AND password = #{password}
+    </select>
+    <!-- 方式二： -->
+    <select id="login2" parameterType="map" resultType="Client">
+    	SELECT id,username,password FROM client WHERE username = #{username} AND password = #{password}
+    </select>
+    <!-- 方式三： -->
+    <select id="login3" resultType="Client">
+    	SELECT id,username,password FROM client WHERE username = #{username} AND password = #{password}
+    </select>
+    
+    <!-- 练习了多条件查询的三种方式，顺便再测试一下${}与#{}两种表达式的区别 -->
+    <!--
+    	它们的相同点在于都可以读取对象中的属性值
+                   不同点有：
+                   1:#{}会现在SQL中用一个？占位符，然后在将参数值设置到这个占位符中。${}会直接把参数值加入到SQL中。
+                   2：无论参数值是什么类型，#{}会把把它当作一个字符串，并在两边加上单引号。
+                   3：${}会导致SQL注入，因此使用#{}更安全。
+                    结论：在需要？占位符的地方使用#{}，在拼接SQL时对于SQL的固定部分可以使用${}，比如在对查询结果进行排序时可以这样写：SELECT ... ORDER BY ${param}，
+                               如果使用#{}就会使用占位符，然后把排序条件看成是一个字符串加上单引号，从而使排序条件失效。
+             
+     -->
+    <select id="listAll" resultType="Client">
+    	SELECT id,username,password FROM client ORDER BY ${param}
+    </select>
+</mapper>
+
+ 
