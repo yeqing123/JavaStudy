@@ -9,8 +9,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import com.yeqing.mybatis.hello.domain.User;
-import com.yeqing.mybatis.hello.mapper.MyMapperProxy;
 import com.yeqing.mybatis.hello.mapper.UserMapper;
+import com.yeqing.mybatis.hello.proxy.MyMapperProxy;
 import com.yeqing.mybatis.hello.util.MybatisUtil;
 
 import lombok.Cleanup;
