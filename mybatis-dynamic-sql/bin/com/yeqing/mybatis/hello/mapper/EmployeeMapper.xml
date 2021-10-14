@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeqing.mybatis.hello.mapper.EmployeeMapper">
+    <!-- 查询工资高于等于1000的员工 -->
+	<select id="query1" resultType="Employee">
+		SELECT id,name,sn,salary,deptId FROM employee
+		<if test="minSalary!=null">
+			WHERE salary >= #{minSalary}
+		</if>
+	</select>
+	
+	<!-- 查询工资在1000~2000之间的员工 -->
+	<select id="query2" resultType="Employee" >
+		SELECT id,name,sn,salary,deptId FROM employee WHERE 1 = 1
+		<if test="minSalary!=null">
+			AND salary >= #{minSalary}
+		</if>
+		<if test="maxSalary!=null">
+			AND salary &lt;= #{maxSalary} 
+		</if>
+	</select>
+	
+	
+</mapper>
