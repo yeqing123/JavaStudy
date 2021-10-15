@@ -4,9 +4,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="lib/mybatis-3.5.7.jar"/>
+	<classpathentry kind="lib" path="lib/mybatis-3.5.7.jar" sourcepath="C:/Users/yeqin/Desktop/Java资源包/mybatis框架/mybatis-src-3.5.7.zip"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.18.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Lombok"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lombok"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

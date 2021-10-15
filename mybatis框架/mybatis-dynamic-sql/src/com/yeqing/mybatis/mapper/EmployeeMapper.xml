@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yeqing.mybatis.mapper.EmployeeMapper">
+	<!-- 查询工资高于或等于1000的员工 -->
+	<select id="query1" resultType="Employee">
+		SELECT id,name,sn,salary,deptId FROM employee
+		<where>
+			<if test="minsalary!=null">
+				salary >= #{minsalary}
+			</if>
+		</where>
+	</select>
+	<!-- 查询工资在1000~2000之间的员工 -->
+	<select id="query2" resultType="Employee">
+		SELECT id,name,sn,salary,deptId FROM employee
+		<where>
+			<if test="minsalary!=null">
+				salary >= #{minsalary}
+			</if>
+			<if test="maxsalary!=null">
+				AND salary &lt;= #{maxsalary}
+			</if>
+		</where>
+	</select>
+	<!-- 查询指定部门的员工 -->
+	<select id="query3" resultType="Employee">
+		SELECT id,name,sn,salary,deptId FROM employee
+		<where>
+			<if test="deptIds!=null">
+				<foreach collection="deptIds" item="deptId">
+					OR deptId = #{deptId}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 修改指定员工的信息 -->
+	<update id="update">
+		UPDATE employee
+		<set>
+			<if test="e!=null">
+				name=#{e.name},sn=#{e.sn},salary=#{e.salary},deptId=#{e.deptId}
+				<where>
+					id = #{e.id}
+				</where>
+			</if>
+		</set>
+	</update>
+	<!-- 批量插入数据 -->
+	<insert id="batchSave">
+		INSERT INTO employee (name,sn,salary,deptId) VALUES
+		<foreach collection="emps" item="e" separator=",">
+			(#{e.name},#{e.sn},#{e.salary},#{e.deptId})
+		</foreach>
+	</insert>
+	<!-- 批量删除数据 -->
+	<delete id="batchDelete">
+		DELETE FROM employee 
+		<trim prefix="WHERE" prefixOverrides="OR |AND">
+			<foreach collection="ids" item="id">
+				OR id=#{id}
+			</foreach>
+		</trim>
+	</delete>
+</mapper>

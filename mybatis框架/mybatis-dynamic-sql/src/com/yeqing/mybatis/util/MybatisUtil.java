@@ -1,4 +1,4 @@
-package com.yeqing.mybatis.hello.util;
+package com.yeqing.mybatis.util;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -12,7 +12,7 @@
     
 	<!-- 设置别名 -->
 	<typeAliases>
-		<package name="com.yeqing.mybatis.hello"/>
+		<package name="com.yeqing.mybatis"/>
 	</typeAliases>
 	<!-- 环境配置 -->
 	<environments default="test">
@@ -31,6 +31,6 @@
 	</environments>
 	<!-- 配置映射器 -->
 	<mappers>
-		<mapper resource="com/yeqing/mybatis/hello/mapper/EmployeeMapper.xml"/>
+		<mapper resource="com/yeqing/mybatis/mapper/EmployeeMapper.xml"/>
 	</mappers>
 </configuration>

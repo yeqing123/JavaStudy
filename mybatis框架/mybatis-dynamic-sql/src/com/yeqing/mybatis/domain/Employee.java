@@ -1,10 +1,10 @@
-package com.yeqing.mybatis.hello.domain;
+package com.yeqing.mybatis.domain;
 
 import java.math.BigDecimal;
 
 import lombok.Data;
 
-//封装了employee表中的数据
+//封装了employee表中的信息
 @Data
 public class Employee {
 	private Long id;
