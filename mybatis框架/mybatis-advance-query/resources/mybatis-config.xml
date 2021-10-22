@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 设置所需的资源文件 -->
+	<properties resource="db.properties"></properties>
+	<!-- 设置日志 -->
+	<settings>
+		<setting name="logImpl" value="LOG4J"/>
+	</settings>
+	<!-- 给包中的所有对象设置别名 -->
+	<typeAliases>
+		<package name="com.yeqing.mybatis"/>
+	</typeAliases>
+	<!-- 配置应用所需的运行环境 -->
+	<environments default="development">
+		<environment id="development">
+			<!-- 配置事务管理器 -->
+			<transactionManager type="JDBC"></transactionManager>
+			<!-- 配置数据库连接池，并获取连接所需的四要素 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.url}"/>
+				<property name="username" value="${jdbc.username}"/>
+				<property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 配置映射器 -->
+	<mappers>
+		<mapper resource="com/yeqing/mybatis/mapper/EmployeeMapper.xml"/>
+	</mappers>
+</configuration>
