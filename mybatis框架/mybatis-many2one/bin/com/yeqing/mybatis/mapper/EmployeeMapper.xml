@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yeqing.mybatis.mapper.EmployeeMapper">
+	<!-- 保存新员工 -->
+	<insert id="save">
+		INSERT INTO t_employee (name,dept_id) VALUES (#{name},#{dept.id})
+	</insert>
+	
+	
+	<!-- 查询指定的员工信息， baseResultMap已经定义在了EmployeeMapper_anotherSQL.xml文件中-->
+	<select id="get" resultMap="baseResultMap">
+		SELECT id,name,dept_id FROM t_employee WHERE id=#{id}
+	</select>
+	
+	<!-- 为了解决N+1问题，我们只有使用多表查询，并对结果集进行处理 -->
+	<resultMap type="Employee" id="joinResultMap">
+		<!-- 多表查询时所有的列都需要处理 -->
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<!-- 处理查询出的部门信息 -->
+		<association property="dept" javaType="Department">
+			<id column="d_id" property="id"/>
+			<result column="d_name" property="name"/>
+		</association>
+	</resultMap>
+	
+	<!-- 使用多表查询所有员工信息，并设置列的别名 -->
+	<select id="listAll" resultMap="joinResultMap">
+		SELECT e.id,e.name,e.dept_id,d.id AS d_id,d.name AS d_name FROM t_employee e JOIN department d ON d.id=e.dept_id
+	</select>
+</mapper>

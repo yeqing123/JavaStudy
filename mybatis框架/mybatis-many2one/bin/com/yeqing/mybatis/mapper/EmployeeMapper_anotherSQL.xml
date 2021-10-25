@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yeqing.mybatis.mapper.EmployeeMapper">
+	
+	<!-- 在查询操作中，因为dept_id列与dept属性的类型不一致，所以我们需要先对结果集进行处理 -->
+	<resultMap type="Employee" id="baseResultMap">
+	    <id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="dept_id" property="dept.id"/>
+		<!-- 让mybatis帮我们发送额外的SQL，来查询部门信息，并保存到dept属性中 -->
+		<association property="dept" column="dept_id"
+		    select="com.yeqing.mybatis.mapper.DepartmentMapper.get"/>
+	</resultMap>
+	
+	
+	<!-- 使用baseResultMap查询所有员工信息时会出现N+1问题 -->
+	<select id="anotherForListAll" resultMap="baseResultMap">
+		SELECT id,name,dept_id FROM t_employee
+	</select>
+</mapper>
