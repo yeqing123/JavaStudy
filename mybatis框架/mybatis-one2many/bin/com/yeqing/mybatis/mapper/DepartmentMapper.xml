@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeqing.mybatis.mapper.DepartmentMapper">
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO department (name) VALUES (#{name})
+	</insert>
+
+	<!-- 使用额外SQL查询时，需要对结果集进行处理 -->
+	<resultMap type="Department" id="anotherResultMap">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<!-- 如果是单独的属性对象用association元素，如果是集合属性对象用collection元素 -->
+		<collection property="emps" column="id" ofType="Employee"
+			select="com.yeqing.mybatis.mapper.EmployeeMapper.selectByDeptId" />
+	</resultMap>
+
+	<select id="get4another" resultMap="anotherResultMap">
+		SELECT id,name FROM
+		department WHERE id = #{id}
+	</select>
+
+	<!-- 使用多表查询时查询出的结果集中列与对象的属性不匹配，需要进行处理 -->
+	<resultMap type="Department" id="joinResultMap">
+		<id column="d_id" property="id" />
+		<result column="d_name" property="name" />
+		<collection property="emps" ofType="Employee">
+			<id column="id" property="id" />
+			<result column="name" property="name" />
+			<result column="dept_id" property="deptId" />
+		</collection>
+	</resultMap>
+
+	<select id="get4join" resultMap="joinResultMap">
+		SELECT
+		e.id,e.name,e.dept_id,d.id AS d_id,d.name AS d_name FROM t_employee e
+		JOIN department d ON e.dept_id=d.id WHERE d.id = #{id}
+	</select>
+</mapper>
