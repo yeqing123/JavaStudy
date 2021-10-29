@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yeqing.mybatis.mapper.StudentMapper">
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO student (name) VALUES (#{name})
+	</insert>
+	
+	<!-- 保存每个学生与老师的师生关系 -->
+	<insert id="insertRelationWithTeacher">
+		INSERT INTO student_teacher (student_id, teacher_id) VALUES (#{studentId},#{teacherId})
+	</insert>
+	
+	<!-- 删除指定的学生信息 -->
+	<delete id="delete">
+		DELETE FROM student WHERE id = #{id}
+	</delete>
+	<!-- 删除student_teacher表中某个学生所维护的师生关系 -->
+	<delete id="deleteRelationWithTeacher">
+		DELETE FROM student_teacher WHERE student_id = #{studentId}
+	</delete>
+	
+	<!-- 查询指定学生的信息，并使用额外SQL查询与他存在师生关系的老师 -->
+	<select id="get" resultMap="baseResultMap">
+		SELECT id,name FROM student WHERE id = #{id}
+	</select>
+	
+	<!-- 建立查询结果与学生对象属性之间的映射关系，并用额外SQL查询与该学生存在师生关系的老师 -->
+	<resultMap type="Student" id="baseResultMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<collection property="teachers" ofType="Teacher"
+			column="id"
+			select="com.yeqing.mybatis.mapper.TeacherMapper.selectByStudentId"/>
+	</resultMap>
+</mapper>
