@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yeqing.mybatis.mapper.TeacherMapper">
+
+    <!-- 使用mybatis自带的二级缓存，cache元素无需配置任何属性，如果使用第三方缓存框架就需要配置type属性 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+    
+	<!-- 可以设定useCache属性为true，表示使用缓冲，默认也为true -->
+	<select id="get" resultType="Teacher"  useCache="true">
+		SELECT id,name FROM teacher WHERE id = #{id}
+	</select>
+	
+	<!-- 可以通过配置属性，对不同的SQL设置不同的缓存操作
+	<select ... flushCache="false" useCache="true"/>
+	<insert ... flushCache="true"/>
+	<update ... flushCache="true"/>
+	<delete ... flushCache="true"/>
+	 -->
+</mapper>
