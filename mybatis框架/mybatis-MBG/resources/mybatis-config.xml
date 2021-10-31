@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 配置连接数据库所需的资源文件 -->
+	<properties resource="db.properties"/>
+	<!-- 全局配置 -->
+	<settings>
+		<!-- 开启缓存机制，mybatis自带的缓存默认就是开启的 -->
+		<setting name="cacheEnabled" value="true"/>
+		
+		<setting name="logImpl" value="LOG4J"/>
+		<!-- 开启延迟加载功能 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<!-- 关闭积极加载 -->
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 指定触发延迟加载的方法 -->
+		<setting name="lazyLoadTriggerMethods" value="clone"/>
+	</settings>
+	<!-- 设置别名 -->
+	<typeAliases>
+		<package name="com.yeqing.mybatis"/>
+	</typeAliases>
+	<!-- 配置运行环境 -->
+	<environments default="development">
+		<environment id="development">
+			<!-- 事务管理器 -->
+			<transactionManager type="JDBC"/>
+			<!-- 数据库连接池 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.url}"/>
+				<property name="username" value="${jdbc.username}"/>
+				<property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- 配置映射器 -->
+	<mappers>
+		<mapper resource="com/yeqing/mybatis/mapper/EmployeeMapper.xml"/>
+	</mappers>
+</configuration>

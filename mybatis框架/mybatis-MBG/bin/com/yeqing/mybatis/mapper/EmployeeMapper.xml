@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeqing.mybatis.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.yeqing.mybatis.domain.Employee">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="salary" jdbcType="DECIMAL" property="salary" />
+    <result column="deptId" jdbcType="BIGINT" property="deptId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, sn, salary, deptId
+  </sql>
+  <select id="selectByExample" parameterType="com.yeqing.mybatis.domain.EmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from `employee`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.yeqing.mybatis.domain.EmployeeKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `employee`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.yeqing.mybatis.domain.EmployeeKey">
+    delete from `employee`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yeqing.mybatis.domain.EmployeeExample">
+    delete from `employee`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.yeqing.mybatis.domain.Employee" useGeneratedKeys="true">
+    insert into `employee` (name, sn, salary, 
+      deptId)
+    values (#{name,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{salary,jdbcType=DECIMAL}, 
+      #{deptId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.yeqing.mybatis.domain.Employee" useGeneratedKeys="true">
+    insert into `employee`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="deptId != null">
+        deptId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=DECIMAL},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yeqing.mybatis.domain.EmployeeExample" resultType="java.lang.Long">
+    select count(*) from `employee`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update `employee`
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sn != null">
+        sn = #{record.sn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salary != null">
+        salary = #{record.salary,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deptId != null">
+        deptId = #{record.deptId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update `employee`
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      sn = #{record.sn,jdbcType=VARCHAR},
+      salary = #{record.salary,jdbcType=DECIMAL},
+      deptId = #{record.deptId,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yeqing.mybatis.domain.Employee">
+    update `employee`
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=DECIMAL},
+      </if>
+      <if test="deptId != null">
+        deptId = #{deptId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yeqing.mybatis.domain.Employee">
+    update `employee`
+    set name = #{name,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=DECIMAL},
+      deptId = #{deptId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
