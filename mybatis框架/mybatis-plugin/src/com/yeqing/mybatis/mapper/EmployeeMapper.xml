@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yeqing.mybatis.mapper.EmployeeMapper">
+
+	
+	<select id="listMap" resultType="Map">
+		SELECT id AS e_id,name AS e_name,sn AS e_sn,salary AS e_salary,deptId AS e_deptId FROM employee
+	</select>
+	
+</mapper>
