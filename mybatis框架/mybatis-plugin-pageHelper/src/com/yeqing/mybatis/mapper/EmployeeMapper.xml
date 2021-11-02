@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yeqing.mybatis.mapper.EmployeeMapper">
+	
+	<!-- 高级查询 -->
+	<select id="advanceQuery" resultType="Employee">
+		SELECT id,name,sn,salary,deptId FROM employee
+		<where>
+			<if test="minsalary!=null">
+				salary >= #{minsalary}
+			</if>
+			<if test="maxsalary!=null">
+				AND salary &lt;= #{maxsalary}
+			</if>
+			<if test="deptId>0">
+				AND deptId = #{deptId}
+			</if>
+			<if test="keyword!=null">
+				<bind name="keywordLike" value="'%'+keyword+'%'"/>
+				AND (name LIKE #{keywordLike} OR sn LIKE #{keywordLike})
+			</if>
+		</where>
+	</select>
+	
+	<select id="listAll" resultType="Employee">
+		SELECT id,name,sn,salary,deptId FROM employee
+	</select>
+	
+</mapper>

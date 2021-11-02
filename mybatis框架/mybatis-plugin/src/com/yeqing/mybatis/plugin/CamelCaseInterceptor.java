@@ -1,6 +1,7 @@
 package com.yeqing.mybatis.plugin;
 
 import java.sql.Statement;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -10,59 +11,61 @@ import org.apache.ibatis.executor.resultset.ResultSetHandler;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 
-@Intercepts(@Signature(type = ResultSetHandler.class, method = "handleResultSets", args = { Statement.class }))
+//自定义一个拦截器，将查询出来的结果中所有的带有下划线的属性名称，转换为驼峰命名规则
+@Intercepts(@Signature(
+		type = ResultSetHandler.class,
+		method = "handleResultSets",
+		args = (Statement.class)))
 public class CamelCaseInterceptor implements Interceptor {
-
-	public Object plugin(Object target) {
-		return Plugin.wrap(target, this);
-	}
-
-	public void setProperties(Properties properties) {
-	}
-
+    
+	private Properties properties;
+	//实现拦截器的具体操作细节
 	public Object intercept(Invocation invocation) throws Throwable {
-		List<Object> list = (List<Object>) invocation.proceed();
-        
-		for (Object obj : list) {
+        List<Object> list = (List<Object>) invocation.proceed();
+        for (Object obj : list) {
 			if(!(obj instanceof Map)) {
 				break;
 			}
-			handlerKey((Map<String,Object>) obj);
+			Map<String,Object> map = (Map<String, Object>) obj;
+			//处理每个Map元素中的key
+			handleKey(map);
 		}
 		return list;
 	}
-
-	private void handlerKey(Map<String, Object> map) {
-		Set<String> keys = map.keySet();
-		for (String key : keys) {
-			if (key.startsWith("A") && key.endsWith("Z") || key.contains("_")) {
-				String newKey = handlerString(key);
-				Object val = map.get(key);
-				map.remove(key);
-				map.put(newKey, val);
-			}
+	//由使用拦截器的人提供相关的属性
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+	private void handleKey(Map<String, Object> map) {
+        Set<String> keySet = new HashSet<>(map.keySet());
+        for (String key : keySet) {
+		    //判断key是否为大写字母，或者是否包含下划线
+        	if(key.startsWith("A") && key.endsWith("Z") || key.contains("_")) {
+        		String newKey = handleKey(key);  //按照驼峰命名规则，修改key
+        		map.remove(key);
+        		map.put(newKey, map.get(key));
+        	}
 		}
 	}
-
-	private String handlerString(String str) {
-		boolean findUnderline = false; // 表示是否找到了下划线
+	private String handleKey(String key) {
 		StringBuilder sb = new StringBuilder();
-		for (int index = 0; index < str.length(); index++) {
-			char ch = str.charAt(index);
-			if (ch == '_') {
-				findUnderline = true;
+		boolean foundUnderline = false; //标识是否已经发现下划线
+		for (int index = 0; index < key.length(); index++) {
+			char ch = key.charAt(index);
+			if(ch == '_') {
+				foundUnderline = true;
 			} else {
-				if (!findUnderline) {
-					sb.append(Character.toLowerCase(ch)); // 如果没找到下划线，拼入小写字母
+				if(foundUnderline) { 
+					sb.append(Character.toUpperCase(ch));
+				    foundUnderline = false;
 				} else {
-					sb.append(Character.toUpperCase(ch)); // 如果已经找到下划线了，就拼入大写字母
-					findUnderline = false;
+					sb.append(Character.toLowerCase(ch));
 				}
 			}
 		}
 		return sb.toString();
 	}
+
 }
