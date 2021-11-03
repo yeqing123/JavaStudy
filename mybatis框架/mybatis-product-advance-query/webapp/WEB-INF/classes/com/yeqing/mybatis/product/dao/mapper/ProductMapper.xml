@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yeqing.mybatis.product.dao.mapper.ProductMapper">
+	
+	<!-- 根据用户给出的条件，进行高级查询 -->
+	<select id="query" resultType="Product">
+		SELECT pid,name,note,price,count,subdir FROM product
+		<where>
+			<if test="qo.name!=null">
+				<bind name="nameLike" value="'%'+qo.name+'%'"/>
+				name LIKE #{nameLike}
+			</if>
+			<if test="qo.note!=null">
+				<bind name="noteLike" value="'%'+qo.note+'%'"/>
+				AND note LIKE #{noteLike}
+			</if>
+			<if test="qo.minprice!=null">
+				AND price >= #{qo.minprice}
+			</if>
+			<if test="qo.maxprice!=null">
+				AND price &lt;= #{qo.maxprice}
+			</if>
+			<if test="qo.keyword!=null">
+				<bind name="keywordLike" value="'%'+qo.keyword+'%'"/>
+				AND (name LIKE #{keywordLike} OR note LIKE #{keywordLike})
+			</if>
+			<if test="qo.dir>0">
+				AND subdir = #{qo.dir}
+			</if>
+		</where>
+	</select>
+	
+	<select id="get" resultType="Product">
+		SELECT pid,name,note,price,count,subdir FROM product WHERE pid = #{pid}
+	</select>
+	
+	<!-- 添加新的商品信息 -->
+	<insert id="save">
+		INSERT INTO product (name, note, price, count, subdir) VALUES (#{p.name},#{p.note},#{p.price},#{p.count},#{p.subDir})
+	</insert>
+	
+	<!-- 修改指定商品信息 -->
+	<update id="update">
+		UPDATE product SET name=#{p.name}, note=#{p.note}, price=#{p.price}, count=#{p.count}, subdir=#{p.subDir} WHERE pid = #{p.pid}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM product WHERE pid = #{pid}
+	</delete>
+</mapper>

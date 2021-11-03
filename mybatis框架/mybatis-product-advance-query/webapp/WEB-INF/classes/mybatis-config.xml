@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<!-- 设置主配置文件所需的资源文件 -->
+	<properties resource="db.properties"/>
+	
+	<!-- 全局配置 -->
+	<settings>
+		<!-- 设置日志 -->
+		<setting name="logImpl" value="LOG4J"/>
+		
+	</settings>
+	
+	<!-- 设置别名 -->
+	<typeAliases>
+		<package name="com.yeqing.mybatis.product"/>
+	</typeAliases>
+	
+	<!-- 配置插件（拦截器）用于增强mybatis的功能 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<property name="helperDialect" value="mysql"/>
+			<!-- 如果pageSize为0，则表示查询所有数据 -->
+			<property name="pageSizeZero" value="true"/>
+			<!-- pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页 -->
+			<property name="reasonable" value="true"/>
+		</plugin>
+	</plugins>
+	
+	<!-- 配置运行环境 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.url}"/>
+				<property name="username" value="${jdbc.username}"/>
+				<property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 配置映射器 -->
+	<mappers>
+		<mapper resource="com/yeqing/mybatis/product/dao/mapper/ProductMapper.xml"/>
+		<mapper resource="com/yeqing/mybatis/product/dao/mapper/SubDirMapper.xml"/>
+		<mapper resource="com/yeqing/mybatis/product/dao/mapper/UserMapper.xml"/>
+	</mappers>
+</configuration>
