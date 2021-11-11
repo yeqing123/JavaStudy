@@ -8,6 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.yeqing.hello.HelloWorld;
 
+//spring的第一中测试方式，使用该种方式时XML配置文件必须是Xxx-context.xml的命名形式
 @SpringJUnitConfig
 public class SpringTestTest1 {
     @Autowired

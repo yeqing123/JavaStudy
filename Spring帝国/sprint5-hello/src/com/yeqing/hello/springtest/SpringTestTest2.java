@@ -8,7 +8,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yeqing.hello.HelloWorld;
 
+//spring的第二种测试方式
 @RunWith(SpringJUnit4ClassRunner.class)
+//xml文件可以自定义
 @ContextConfiguration("classpath:com/yeqing/hello/springtest/springTest.xml")
 public class SpringTestTest2 {
 

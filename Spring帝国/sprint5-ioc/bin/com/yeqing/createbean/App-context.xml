@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 方法1：调动Bean的无参构造器，这是最普通最一般的方法 -->
+	<bean id="Cat1" class="com.yeqing.factory._01_constructor.Cat1"/>
+	
+	<!-- 方法2：使用静态工厂类，调用该工厂类中指定的静态方法 -->
+	<bean id="Cat2" class="com.yeqing.factory._02_static_factory.Cat2Factory" factory-method="createInstance"/>
+	
+	<!-- 方法3：使用实例化工厂类，调用工厂类对象中的方法来创建Bean对象 -->
+	<bean id="factory" class="com.yeqing.factory._03_instance_factory.Cat2Factory"/>
+	<bean id="Cat3" factory-bean="factory" factory-method="createInstance"/>
+	
+	<!-- 方法4：使用实现了FactoryBean接口的工厂类，来实例化Bean对象（它是实例工厂的变种） -->
+	<!-- 实现了FactoryBean接口的工厂类中具有相同的实例化方法名getObejct，所以可以忽略不配 -->
+	<bean id="Cat4" class="com.yeqing.factory._04_factory_bean.Cat4FactoryBean">
+		<!-- 配置Cat4FactoryBean中的属性 -->
+		<property name="username" value="Lucy"></property>
+	</bean>
+</beans>

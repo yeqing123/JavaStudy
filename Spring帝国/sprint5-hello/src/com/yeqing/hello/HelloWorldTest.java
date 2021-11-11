@@ -11,7 +11,7 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-
+//比较使用传统方式和spring框架的区别
 public class HelloWorldTest {
 	@Test//用传统方法测试HelloWord类
 	void testOld() throws Exception {
