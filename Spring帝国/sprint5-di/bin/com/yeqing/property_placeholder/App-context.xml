@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- 直接在xml中写入连接元素，这样不好，因为写死了 
+	<bean id="spDs" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/springdemo"/>
+		<property name="username" value="root"/>
+		<property name="password" value="mysqladmin"/>
+		<property name="initialSize" value="2"/>
+	</bean>
+	-->
+
+    <context:property-placeholder location="classpath:com/yeqing/property_placeholder/db.properties" system-properties-mode="NEVER"/>	
+	<!-- 从.properties文件中读取连接元素，推荐，但是需要配置命名空间contextname约束，然后当如资源文件 -->
+	<bean id="spDs" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="initialSize" value="${jdbc.initialSize}"/>
+	</bean>
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 将两个Bean类型中的公共部分抽离出来，作为父bean -->
+    <bean id="parentBean" abstract="true">
+    	<property name="name" value="Lucy"/>
+		<property name="age" value="17"/>
+    </bean>
+    
+	<bean id="tagbean1" class="com.yeqing.bean_inherit.TagBean1" parent="parentBean"> 
+		<property name="color" value="yellow"/>
+	</bean>
+	<bean id="tagbean2" class="com.yeqing.bean_inherit.TagBean2" parent="parentBean"> 
+		<property name="weight" value="300"/>
+	</bean>
+</beans>

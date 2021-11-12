@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 属性注入的第一种形式：简单类型  -->
+	<bean id="employee1" class="com.yeqing.setter.Employee1">
+		<property name="username" value="小明"/>
+		<property name="age" value="19"/>
+ 		<property name="salary" value="1000"/>  
+	</bean>
+	
+	<!-- 属性注入的第二种形式：对象类型 
+	<bean id="cat" class="com.yeqing.setter.Cat"/>
+	<bean id="employee2" class="com.yeqing.setter.Employee2">
+		<property name="username" value="小王"/>
+		<property name="c" ref="cat"/>
+	</bean>  -->
+	
+	<!-- 如果不想让外部访问Cat属性，可以将它配置成内部bean -->
+	<bean id="employee22" class="com.yeqing.setter.Employee2">
+		<property name="username" value="小刘"/>
+		<property name="c">
+			<bean class="com.yeqing.setter.Cat"/>
+		</property>
+	</bean>
+	
+	<!-- 属性注入的第三种形式：集合类型 -->
+	<bean id="cat" class="com.yeqing.setter.Cat" scope="prototype"/>
+	<bean id="employee3" class="com.yeqing.setter.Employee3">
+		<property name="set">
+			<set>
+				<value>set1</value>
+				<value>set2</value>
+				<value>set3</value>
+			</set>
+		</property>
+		<property name="list">
+			<list>
+				<value>list1</value>
+				<value>list2</value>
+				<value>list3</value>
+			</list>
+		</property>
+		<property name="array">
+			<array>
+				<value>array1</value>
+				<value>array2</value>
+				<value>array3</value>
+			</array>
+		</property>
+		<property name="map1">
+			<map>
+				<entry key="1" value-ref="cat"/>
+				<entry key="2" value-ref="cat"/>
+				<entry key="3" value-ref="cat"/>
+			</map>
+		</property>
+		<property name="map2">
+			<map>
+				<entry key="aaa" value="AAA"/>
+				<entry key="bbb" value="BBB"/>
+				<entry key="ccc" value="CCC"/>
+			</map>
+		</property>
+		<property name="prop">
+			<!-- <props>
+				<prop key="123">abc</prop>
+				<prop key="456">def</prop>
+				<prop key="789">ghi</prop>
+			</props> -->
+			<!-- 还可以简写为： -->
+			<value>
+				pKey1=pValue1
+				pKey2=pValue2
+				pKey3=pValue3
+			</value>
+		</property>
+		
+	</bean>
+</beans>

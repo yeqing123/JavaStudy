@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+        
+        <!-- 配置资源占位符 -->
+        <context:property-placeholder location="classpath:db.properties"/>
+        <!-- 配置数据库连接池，从资源文件中读取连接要素，注入到连接池对象中 -->
+        <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        	<property name="driverClassName" value="${jdbc.driverClassName}"/>
+        	<property name="url" value="${jdbc.url}"/>
+        	<property name="username" value="${jdbc.username}"/>
+        	<property name="password" value="${jdbc.password}"/>
+        	<property name="initialSize" value="${jdbc.initialSize}"/>
+        </bean>
+        
+        <!-- 配置DAO -->
+        <bean id="userDAO" class="com.yeqing.register.dao.impl.UserDAOImpl">
+        	<property name="dataSource" ref="dataSource"></property>
+        </bean>
+        
+        <!-- 配置service -->
+        <bean id="userService" class="com.yeqing.register.service.UserService">
+        	<property name="dao" ref="userDAO"/>
+        </bean>
+        
+        <!-- 配置表现层:
+        	如果模拟的是Struts2的Action，设置bean为多例的，即配置scope属性为“prototype”
+        	如果模拟的是Spring MVC，就设置bean为单例的，即配置scope属性为“singleton”
+         -->
+        <bean id="registerAction" class="com.yeqing.register.action.RegisterAction" scope="singleton">
+        	<property name="service" ref="userService"></property>
+        </bean>
+        
+</beans>
