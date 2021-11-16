@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+	<bean id="employeeDAO" class="com.yeqing.dao.EmployeeDAOImpl"/>
+	
+	<bean id="tx" class="com.yeqing.tx.TransactionManager"/>
+	
+	<bean id="employeeServiceProxy" class="com.yeqing.proxt.EmployeeServiceProxy">
+		<!-- 
+		因为EmployeeService类和它的代理类都实现了IEmployeeService接口，
+		所以我们将EmployeeService定义成一个内部bean，它的好处是：
+		一来消除了同时定义了两个接口实现类的bean所造成的混淆；二来避免了外部直接调用EmployeeService实例 
+		-->
+		<property name="target">
+			<bean class="com.yeqing.service.EmployeeServiceImpl">
+				<property name="dao" ref="employeeDAO"/>
+			</bean>
+		</property>
+		<property name="txManager" ref="tx"/>
+	</bean>
+</beans>
