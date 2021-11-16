@@ -7,7 +7,7 @@ import java.lang.reflect.Proxy;
 @SuppressWarnings("all")
 public class TransactionAdvice implements InvocationHandler {
 	
-	private Object target;   //真实对象
+	private Object target;   //目标对象，被代理的真实对象（又叫委托对象）
 	private TransactionManager txManager; //事务管理类
 	
 	public void setTarget(Object target) {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+	<bean id="employeeDAO" class="com.yeqing.dao.EmployeeDAOImpl"/>
+	
+	<bean id="log" class="com.yeqing.log.LogUtil"/>
+	
+	<bean id="methodAdvice" class="com.yeqing.interceptor.LogAdvice">
+		<property name="target">
+			<bean class="com.yeqing.service.EmployeeService">
+				<property name="dao" ref="employeeDAO"/>
+			</bean>
+		</property>
+		<property name="logUtil" ref="log"/>
+	</bean>
+</beans>
