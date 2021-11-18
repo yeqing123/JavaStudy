@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd">
+
+     <!-- 配置资源占位符 -->
+     <context:property-placeholder location="classpath:db.properties"/>
+     <!-- 配置数据库连接池，从资源文件中读取连接要素，注入到连接池对象中 -->
+     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+     	<property name="driverClassName" value="${jdbc.driverClassName}"/>
+     	<property name="url" value="${jdbc.url}"/>
+     	<property name="username" value="${jdbc.username}"/>
+     	<property name="password" value="${jdbc.password}"/>
+     	<property name="initialSize" value="${jdbc.initialSize}"/>
+     </bean>
+     
+     <bean id="accountDAO" class="com.yeqing.dao.impl.AccountDAOImpl">
+     	<property name="DataSource" ref="dataSource"/>
+     </bean>
+     
+     <bean id="accountService" class="com.yeqing.service.impl.AccountServiceImpl">
+     	<property name="dao" ref="accountDAO"/>
+     </bean>
+     
+     <!-- 配置事务管理器 -->
+     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+     	<property name="dataSource" ref="dataSource"/>
+     </bean>
+     
+     <!-- 配置事务增强（WHAT） -->
+     <tx:advice id="txAdvice" transaction-manager="txManager">
+     	<tx:attributes>
+     		<tx:method name="transfer"/>
+     	</tx:attributes>
+     </tx:advice>
+     <!-- 配置AOP -->
+     <aop:config>
+     	<!-- WHERE：在什么地方执行事务增强 -->
+     	<aop:pointcut expression="execution(* com.yeqing.service.*Service.*(..))" id="txPointcut"/>
+     	<!-- WHEN：在什么地方，什么时机（相当于一个环绕增强），执行事务增强 -->
+     	<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+     </aop:config>
+     
+     
+     <!-- 练习：配置一个通用的CRUD事务增强 -->
+     <tx:advice id="crudTxAdvice" transaction-manager="txManager">
+     	<tx:attributes>
+     		<!-- 给service中所有查询方法做配置 -->
+     		<tx:method name="get*" read-only="true" propagation="REQUIRED"/>
+     		<tx:method name="list*" read-only="true" propagation="REQUIRED"/>
+     		<tx:method name="query*" read-only="true" propagation="REQUIRED"/>
+			<!-- 给service中其他方法（非查询）做配置 -->
+			<tx:method name="*" read-only="false" propagation="REQUIRED"/>
+     	</tx:attributes>
+     </tx:advice>
+</beans>
