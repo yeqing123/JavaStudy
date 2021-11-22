@@ -16,14 +16,14 @@ public class HelloController {
 	@RequestMapper("/hello")
 	public ModelAndView sayHello() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/WEB-INF/view/welcome");
+		mv.setViewName("/WEB-INF/view/welcome.jsp");
 		mv.addModel("msg", "你好，我是在模拟SpringMVC！");
 		return mv;
 	}
 	@RequestMapper("/hello2")
 	public ModelAndView sayHello2() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/WEB-INF/view/welcome2");
+		mv.setViewName("/WEB-INF/view/welcome2.jsp");
 		mv.addModel("msg", "练习模拟SpringMVC，付出就会有回报！");
 		return mv;
 	}

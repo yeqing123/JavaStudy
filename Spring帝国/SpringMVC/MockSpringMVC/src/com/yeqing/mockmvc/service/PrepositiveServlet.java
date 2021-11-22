@@ -2,17 +2,20 @@ package com.yeqing.mockmvc.service;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.yeqing.mockmvc.annotation.Controller;
+import com.yeqing.hello.HelloController;
 import com.yeqing.mockmvc.annotation.RequestMapper;
+import com.yeqing.mockmvc.bean.ModelAndView;
 import com.yeqing.mockmvc.bean.RequestBean;
 
 //获取用户请求，并找到对应的控制类和方法，然后根据方法中的设定进行页面跳转
@@ -26,7 +29,9 @@ public class PrepositiveServlet extends HttpServlet {
 		while(packageName.contains(".")) {  //获取最大的包的名称
 			packageName = packageName.substring(0, packageName.lastIndexOf("."));
 		}
-		List<Class<?>> classList = ClassScanUtil.getContrlloerClassListByAnnotation("packageName", Controller.class);
+		//List<Class<?>> classList = ClassUtil.getClassListByAnnotation("packageName", Controller.class);
+		List<Class<?>> classList = new ArrayList<>();
+		classList.add(HelloController.class);
 		if(classList != null) {
 			for (Class<?> clazz : classList) {
 				Method[] methods = clazz.getDeclaredMethods();
@@ -42,6 +47,23 @@ public class PrepositiveServlet extends HttpServlet {
 	}
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI();
-		System.out.println(urlMap);
+		System.out.println(url);
+		if(url.endsWith(".do")) {
+			url = url.substring(0, url.indexOf(".do"));
+			RequestBean requestBean = urlMap.get(url);
+			Method method = requestBean.getControllerMethod();
+			Class<?> controllerClass = requestBean.getControllerClass();
+			try {
+				Object obj = controllerClass.newInstance();
+				ModelAndView mv = (ModelAndView) method.invoke(obj);
+				Map<String, Object> model = mv.getModel();
+				for(Entry<String, Object> e : model.entrySet()) {
+					req.setAttribute(e.getKey(), e.getValue());
+				}
+				req.getRequestDispatcher(mv.getViewName()).forward(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
