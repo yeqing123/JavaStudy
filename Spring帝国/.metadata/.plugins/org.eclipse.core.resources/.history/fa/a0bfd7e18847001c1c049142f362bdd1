@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- IoC注解解释器 -->
+    <context:annotation-config/>
+    <!-- DI注解解释器 -->
+    <context:component-scan base-package="com.yeqing"/>
+	
+	<bean id="employeeDAO" class="com.yeqing.dao.impl.EmployeeDAOImpl"/>
+	<bean id="employeeService" class="com.yeqing.service.impl.EmployeeServiceImpl">
+		<property name="dao" ref="employeeDAO"/>
+	</bean>
+	<bean id="txAdvice" class="com.yeqing.tx.TransactionManager"/>
+	<bean id="logAdvice" class="com.yeqing.log.LogAdvice"/>
+	
+	<!-- 配置AOP：在什么地方 + 什么时机 + 做什么 -->
+	<aop:config proxy-target-class="false">
+		<!-- WHAT：做什么增强 -->
+		<aop:aspect ref="txAdvice">
+			<!-- WHERE：在哪个包中的哪个接口/类中的哪个方法里做增强 -->
+			<aop:pointcut expression="execution(* com.yeqing.service.*Service.*(..))" id="txPoint"/>
+			<!-- WHEN：在方法中的什么时机，做什么增强 -->
+			<aop:before method="begin" pointcut-ref="txPoint"/>   <!-- 前置增强 -->
+			<aop:after-returning method="commit" pointcut-ref="txPoint"/> <!-- 后置增强 -->
+ 			<aop:after-throwing method="rollback" pointcut-ref="txPoint" throwing="ex"/> <!-- 异常增强 -->
+			<aop:after method="close" pointcut-ref="txPoint"/>   <!-- 最终增强 -->
+			<!-- <aop:around method="around" pointcut-ref="txPoint"/> -->  <!-- 环绕增强，前四中增强的合体 -->
+		</aop:aspect>
+		<!-- 配置记录方法调用日志的增强 -->
+		<aop:aspect ref="logAdvice">
+			<aop:pointcut expression="execution(* com.yeqing.service.*Service.*(..))" id="logPoint"/>
+			<aop:before method="writeLog" pointcut-ref="logPoint"/>
+		</aop:aspect>
+	</aop:config>
+</beans>

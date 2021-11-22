@@ -1,0 +1,81 @@
+package com.yeqing.dao.impl;
+
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.yeqing.dao.IEmployeeDAO;
+import com.yeqing.domain.Employee;
+
+@Repository
+@SuppressWarnings("unchecked")
+public class EmployeeDAOImpl implements IEmployeeDAO {
+	
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	public void setDataSource(DataSource ds) {
+		this.jdbcTemplate = new NamedParameterJdbcTemplate(ds);
+	}
+	public void save(Employee emp) {
+		jdbcTemplate.update("INSERT INTO employee (name, age) VALUES (:ename,:eage)", new HashMap(){{
+			this.put("ename", emp.getName());
+			this.put("eage", emp.getAge());
+		}});
+	}
+
+	public void update(Employee emp) {
+		jdbcTemplate.update("UPDATE employee SET name = :ename, age = :eage WHERE id = :eid", new HashMap() {{
+			this.put("ename", emp.getName());
+			this.put("eage", emp.getAge());
+			this.put("eid", emp.getId());
+		}});
+	}
+
+	public void delete(Long id) {
+		jdbcTemplate.update("DELETE FROM employee WHERE id = :eid", new HashMap() {{
+			this.put("eid", id);
+		}});
+	}
+	@Override
+	public Employee get(Long id) {
+		/*这里的“(rs, rowNum) ->”使用的是Java8新增的Lanmda表达式。原本应该是这样写的：
+		  jdbcTemplate.query("SELECT id,name,age FROM employee WHERE id = ?", new RowMapper<Employee>(){
+		 	return Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Employee e = new Employee();
+				e.setName(rs.getString("name"));
+				e.setAge(rs.getInt("age"));
+				e.setId(rs.getLong("id"));
+				return e;
+			}, id);
+		 */
+		List<Employee> list = jdbcTemplate.query("SELECT id,name,age FROM employee WHERE id = :eid", new HashMap<>() {{
+			this.put("eid", id);
+		}}, (rs, rowNum) -> {
+				Employee e = new Employee();
+				e.setName(rs.getString("name"));
+				e.setAge(rs.getInt("age"));
+				e.setId(rs.getLong("id"));
+				return e;
+			});
+		return list.size()==1?list.get(0):null;
+	}   
+		
+	public List<Employee> listAll() {
+		return super.getJdbcTemplate().query("SELECT id,name,age FROM employee", new RowMapper<Employee>() {
+			public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Employee e = new Employee();
+				e.setName(rs.getString("name"));
+				e.setAge(rs.getInt("age"));
+				e.setId(rs.getLong("id"));
+				return e;
+			}
+		});
+	}
+}

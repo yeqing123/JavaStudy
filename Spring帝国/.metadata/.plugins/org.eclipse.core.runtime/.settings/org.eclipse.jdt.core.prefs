@@ -1,0 +1,24 @@
+JRE_LIB=D\:/Program Files (x86)/spring-tool-suite-4-4.12.1.RELEASE/sts-4.12.1.RELEASE/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059/jre/lib/jrt-fs.jar
+JRE_SRC=D\:/Program Files (x86)/spring-tool-suite-4-4.12.1.RELEASE/sts-4.12.1.RELEASE/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059/jre/lib/src.zip
+eclipse.preferences.version=1
+org.eclipse.jdt.core.classpathVariable.ECLIPSE_HOME=D\:/Program Files (x86)/spring-tool-suite-4-4.12.1.RELEASE/sts-4.12.1.RELEASE/
+org.eclipse.jdt.core.classpathVariable.JRE_LIB=D\:/Java/64jdk1.8.0_121/jre/lib/rt.jar
+org.eclipse.jdt.core.classpathVariable.JRE_SRC=D\:/Java/64jdk1.8.0_121/src.zip
+org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
+org.eclipse.jdt.core.classpathVariable.JUNIT_HOME=D\:/Program Files (x86)/spring-tool-suite-4-4.12.1.RELEASE/sts-4.12.1.RELEASE/plugins/org.junit_4.13.0.v20200204-1500.jar
+org.eclipse.jdt.core.classpathVariable.M2_REPO=C\:/Users/admin01/.m2/repository
+org.eclipse.jdt.core.classpathVariable.TOMCAT_HOME=D\:/Program Files (x86)/apache-tomcat-8.5.70
+org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled
+org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
+org.eclipse.jdt.core.compiler.compliance=1.8
+org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
+org.eclipse.jdt.core.compiler.problem.enablePreviewFeatures=disabled
+org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+org.eclipse.jdt.core.compiler.problem.reportPreviewFeatures=warning
+org.eclipse.jdt.core.compiler.release=disabled
+org.eclipse.jdt.core.compiler.source=1.8
+org.eclipse.jdt.core.compiler.taskCaseSensitive=enabled
+org.eclipse.jdt.core.compiler.taskPriorities=NORMAL,HIGH,NORMAL
+org.eclipse.jdt.core.compiler.taskTags=TODO,FIXME,XXX
+org.eclipse.jdt.core.userLibrary.Lombok=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<userlibrary systemlibrary\="false" version\="2">\r\n\t<archive path\="D\:/eclipse-jee-2020-03-R-incubation-win32-x86_64/eclipse/lombok.jar"/>\r\n</userlibrary>\r\n

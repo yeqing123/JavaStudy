@@ -1,0 +1,27 @@
+CustomFiltersActionGroup.org.eclipse.jdt.ui.PackageExplorer.TAG_DUMMY_TO_TEST_EXISTENCE=storedViewPreferences
+content_assist_autoactivation_triggers_java=.abcd
+content_assist_favorite_static_members=org.assertj.core.api.Assertions.*;org.mockito.Matchers.*;org.mockito.Mockito.*;org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.*;org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.*;org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*;org.springframework.test.web.client.match.MockRestRequestMatchers.*;org.springframework.test.web.client.response.MockRestResponseCreators.*;org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;org.hamcrest.CoreMatchers.*;org.junit.Assert.*
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="org.springframework.core.io.InputStreamSource"><rhs name\="org.springframework.core.io.ClassPathResource"/></lhs><lhs name\="org.springframework.core.io.Resource"><rhs name\="org.springframework.core.io.ClassPathResource"/></lhs><lhs name\="javax.sql.CommonDataSource"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="java.sql.Wrapper"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="javax.sql.DataSource"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="com.alibaba.druid.pool.DruidDataSourceMBean"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="com.alibaba.druid.pool.DruidAbstractDataSourceMBean"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="com.alibaba.druid.pool.ManagedDataSource"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="javax.naming.Referenceable"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="java.io.Closeable"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="java.lang.AutoCloseable"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="java.lang.Cloneable"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="javax.sql.ConnectionPoolDataSource"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="javax.management.MBeanRegistration"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="com.alibaba.druid.pool.DruidAbstractDataSource"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="com.alibaba.druid.proxy.jdbc.DataSourceProxy"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="com.alibaba.druid.pool.WrapperAdapter"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="com.alibaba.druid.pool.DruidDataSource"><rhs name\="com.alibaba.druid.pool.DruidDataSource"/></lhs><lhs name\="java.lang.CharSequence"><rhs name\="java.lang.String"/></lhs></history>
+content_assist_number_of_computers=15
+content_assist_proposals_background=204,232,207
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+lastRecentlyUsedFilters=org.eclipse.jdt.ui.PackageExplorer.ClosedProjectsFilter,
+org.eclipse.buildship.ui.packageexplorer.filter.gradle.buildfolder=true
+org.eclipse.buildship.ui.packageexplorer.filter.gradle.subProject=true
+org.eclipse.jdt.internal.ui.PackageExplorer.EmptyInnerPackageFilter=true
+org.eclipse.jdt.internal.ui.PackageExplorer.HideInnerClassFilesFilter=true
+org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.PackageExplorer.ClosedProjectsFilter=true
+org.eclipse.jdt.ui.PackageExplorer.EmptyLibraryContainerFilter=true
+org.eclipse.jdt.ui.PackageExplorer.ImportDeclarationFilter=true
+org.eclipse.jdt.ui.PackageExplorer.PackageDeclarationFilter=true
+org.eclipse.jdt.ui.PackageExplorer.SyntheticMembersFilter=true
+org.eclipse.jdt.ui.PackageExplorer_patternFilterId_.*=true
+org.eclipse.jdt.ui.formatterprofiles.version=21
+org.eclipse.pde.ui.ExternalPluginLibrariesFilter1=true
+spelling_locale_initialized=true
+typefilter_migrated=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

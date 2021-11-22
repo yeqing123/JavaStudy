@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/64jdk1.8.0_121"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/com.springsource.org.apache.commons.logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-beans-5.3.9.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-context-5.3.9.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-core-5.3.9.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-expression-5.3.9.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-web-5.3.9.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-webmvc-5.3.9.jar" sourcepath="E:/常用文件夹/Java资源包/Spring帝国/spring-framework-5.3.9/libs/spring-webmvc-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-aop-5.3.9.jar"/>
+	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
+</classpath>
