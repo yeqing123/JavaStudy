@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 配置IoC扫描器 -->
+	<context:component-scan base-package="com.yeqing"/>
+	<!-- 配置MVC注解解析器 -->
+	<mvc:annotation-driven/>
+	
+	<!-- 当项目的web.xml中的url-patten元素值为/时，访问静态资源文件时会被springMVC拦截，解决办法如下： -->
+	<!-- 方法一：配置默认的请求处理，它会区分当前请求时映射请求（动态请求）还是非映射请求（静态请求），如果是非映射请求就交给servlet进行处理 -->
+	<!-- <mvc:default-servlet-handler/> -->
+	
+	<!-- 方法二：配置静态资源的映射，其中location就是静态资源文件的真实路径，注意：必须使用classpath前缀！；mapping就是映射的访问路径，写成/**表示根路径下的所有子路径 -->
+	<mvc:resources location="classpath:/static/" mapping="/*"/>
+</beans>
