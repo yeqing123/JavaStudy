@@ -1,4 +1,6 @@
-package com.yeqing.mybatis.dao;
+package com.yeqing.dao;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.yeqing.domain.User;
 

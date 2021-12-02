@@ -1,12 +1,12 @@
-package com.yeqing.mybatis.dao.impl;
+package com.yeqing.dao.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.yeqing.dao.IEmployeeDAO;
 import com.yeqing.domain.Employee;
-import com.yeqing.mybatis.dao.IEmployeeDAO;
-import com.yeqing.mybatis.mapper.EmployeeMapper;
+import com.yeqing.mapper.employee.EmployeeMapper;
 import com.yeqing.util.MybatisUtil;
 
 @Repository

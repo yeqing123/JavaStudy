@@ -1,4 +1,4 @@
-package com.yeqing.mybatis.mapper;
+package com.yeqing.mapper.employee;
 
 import java.util.List;
 

@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yeqing.dao.IEmployeeDAO;
 import com.yeqing.domain.Employee;
-import com.yeqing.mybatis.dao.impl.EmployeeDAOImpl;
 import com.yeqing.service.IEmployeeService;
 
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
 	@Autowired
-	private EmployeeDAOImpl dao;
+	private IEmployeeDAO dao;
 
 	public void save(Employee e) {
 		dao.save(e);

@@ -14,6 +14,7 @@
 	</script>
 </head>
 <body>
+	<h4 align="right">当前登录用户：${user_in_session.username} <a href="/login.jsp">注销</a></h4>
     <h2>员工信息列表</h2>
     <form action="" method="post">
     	<a href="/employee/edit">新增员工</a>

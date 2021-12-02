@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h2>登录页面</h2>
-	${errorMsg}
+	<span style="color:red;">${errorMsg_in_session}</span>
 	<% 
 		session.invalidate();
 	%>
@@ -23,7 +23,7 @@
 				<td><input type="password" name="password" required></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"></td>
+				<td colspan="2" align="center"><input type="submit" value="登录"></td>
 			</tr>
 		</table>
 	</form>

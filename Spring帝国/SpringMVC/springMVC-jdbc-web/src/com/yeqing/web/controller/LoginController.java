@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yeqing.domain.User;
 import com.yeqing.service.IUserService;
@@ -15,13 +16,15 @@ public class LoginController {
 	@Autowired
 	IUserService userService;
 	
+	@RequestMapping("/login")
 	public String login(String username, String password, HttpSession session) {
 		User u = userService.checkLogin(username, password);
 		if(u != null) {
-			return "/employee/list";
+			session.setAttribute("user_in_session", u);
+			return "redirect:/employee/list";
 		}else {
 		    session.setAttribute("errorMsg_in_session", "您输入的账号或密码错误");
-		    return "redirect:/list.jsp";
+		    return "redirect:/login.jsp";
 		}
 	}
 }

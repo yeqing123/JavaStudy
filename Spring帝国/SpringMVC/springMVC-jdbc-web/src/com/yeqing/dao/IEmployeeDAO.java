@@ -1,4 +1,4 @@
-package com.yeqing.mybatis.dao;
+package com.yeqing.dao;
 
 import java.util.List;
 
