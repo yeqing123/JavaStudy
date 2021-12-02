@@ -12,7 +12,7 @@ import com.yeqing.domain.Employee;
 import com.yeqing.service.impl.EmployeeServiceImpl;
 
 @SpringJUnitConfig(locations = "classpath:applicationConfig.xml")
-public class EmployeeDaoTest {
+public class EmployeeServiceTest {
     @Autowired
 	private EmployeeServiceImpl service;
     

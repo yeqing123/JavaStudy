@@ -31,5 +31,6 @@
 	<!-- 配置映射器 -->
 	<mappers>
 		<mapper resource="com/yeqing/mybatis/mapper/EmployeeMapper.xml"/>
+		<mapper resource="com/yeqing/mybatis/mapper/UserMapper.xml"/>
 	</mappers>
 </configuration>
