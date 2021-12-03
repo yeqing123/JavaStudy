@@ -15,6 +15,7 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 	private EmployeeMapper mapper = MybatisUtil.getMapper(EmployeeMapper.class);
 	public void save(Employee e) {
 		mapper.save(e);
+		int a = 1/0;
 	}
 
 	public void delete(Long id) {

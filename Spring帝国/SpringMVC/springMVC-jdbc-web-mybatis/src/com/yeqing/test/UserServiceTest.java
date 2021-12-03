@@ -4,16 +4,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.yeqing.service.IUserService;
+import com.yeqing.dao.IUserDAO;
 
 @SpringJUnitConfig(locations = "classpath:applicationConfig.xml")
 public class UserServiceTest {
     
 	@Autowired
-	private IUserService service;
+	private IUserDAO dao;
 	
 	@Test
 	void testCheckLogin() throws Exception {
-		System.out.println(service.checkLogin("刘莎", "2222"));
+		System.out.println(dao.checkLogin("刘莎", "2222"));
 	}
 }
