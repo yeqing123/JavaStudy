@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 包含applicationConfig.xml文件 -->
+	<import resource="classpath:applicationConfig.xml"/>
+	
+	
+	
+	<!-- 配置mvc注解解析器 -->
+	<mvc:annotation-driven />
+	<!-- 配置静态资源处理器 -->
+	<mvc:default-servlet-handler />
+	
+	<!-- 配置登录验证拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+		    <!-- 
+		    	使用/**可以拦截多级路径，例如：/employee/list
+		    	如果只是用/*则只能拦截以及路径 
+		    -->
+			<mvc:mapping path="/**"/>   
+			<mvc:exclude-mapping path="/login"/>  <!-- 对于/login的请求，不需要拦截，否则无法正确登录 -->
+			<bean class="com.yeqing.interceptor.LoginCheckInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 配置视图名称的前缀和后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+		
+	
+</beans>
