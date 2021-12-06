@@ -10,8 +10,6 @@
 	<!-- 包含applicationConfig.xml文件 -->
 	<import resource="classpath:applicationConfig.xml"/>
 	
-	
-	
 	<!-- 配置mvc注解解析器 -->
 	<mvc:annotation-driven />
 	<!-- 配置静态资源处理器 -->
@@ -29,14 +27,5 @@
 			<bean class="com.yeqing.interceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
-
-	<!-- 配置视图名称的前缀和后缀 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-	
-		
 	
 </beans>
