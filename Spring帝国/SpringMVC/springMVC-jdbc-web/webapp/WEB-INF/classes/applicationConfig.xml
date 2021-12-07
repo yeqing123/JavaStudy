@@ -17,10 +17,10 @@
 	<!-- DI注解解析器 -->
 	<context:annotation-config />
 	<!-- IoC注解解析器 -->
-	<context:component-scan base-package="com.yeqing" />
+	<context:component-scan base-package="com.yeqing"/>
 	
 	<!-- 加载资源文件 -->
-	<context:property-placeholder location="classpath:db.properties"/>
+	<context:property-placeholder location="classpath:db.properties" system-properties-mode="NEVER"/>
 	
 	<!-- 配置德鲁伊连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">

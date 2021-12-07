@@ -50,10 +50,9 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("/saveOrUpdate")
-	public String saveOrUpdate(@Validated Employee e, BindingResult result, Model m) {
-		List<ObjectError> errors = result.getAllErrors();
-		System.out.println(errors);
-		if(errors.size() > 0) {
+	public String saveOrUpdate(Model m, @Validated Employee e, BindingResult bindingResult) {
+		List<ObjectError> errors = bindingResult.getAllErrors();
+		if(errors.size() >= 0) {
 			m.addAttribute("errors", errors);
 			return "/employee/edit";
 		}

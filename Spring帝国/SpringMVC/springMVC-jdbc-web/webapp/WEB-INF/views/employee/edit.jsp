@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>编辑员工信息</h2>
-
+	${errors}
 	<form action="/employee/saveOrUpdate" method="post">
 		<input type="hidden" name="id" value="${e.id}">
 		<table border="1" cellspacing="0" cellpadding="10">

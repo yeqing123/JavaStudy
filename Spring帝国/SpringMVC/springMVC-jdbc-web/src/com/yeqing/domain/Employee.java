@@ -2,6 +2,7 @@ package com.yeqing.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,6 +21,7 @@ public class Employee {
 	private String username;
 	@NotNull(message = "年龄不能为空")
 	@Min(value = 18, message = "年龄最小为18")
+	@Max(value = 60, message = "年龄最大为60")
 	private Integer age;
 	@NotNull(message = "雇佣日期不能为空")
 	private Date hiredate;
