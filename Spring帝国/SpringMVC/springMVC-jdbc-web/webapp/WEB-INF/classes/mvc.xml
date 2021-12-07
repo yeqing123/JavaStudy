@@ -7,9 +7,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<!-- 包含applicationConfig.xml文件 -->
-	<import resource="classpath:applicationConfig.xml"/>
-	
 	<!-- 配置mvc注解解析器 -->
 	<mvc:annotation-driven />
 	<!-- 配置静态资源处理器 -->
