@@ -38,6 +38,26 @@
 			<param-value>classpath:applicationConfig.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- 
+			使用Servlet3自带的文件上传组件，不用依赖Apache的jar包。
+			如果使用Apache组件执行文件上传操作，需要依赖两个jar包：
+			com.springsource.org.apache.commons.fileupload-x.x.x.jar
+			com.springsource.org.apache.commons.io-x.x.x.jar
+		 -->
+		<multipart-config>
+			<!-- 上传文件保存的位置 -->
+			<location>
+				D:\eclipse-jee-2020-03-R-incubation-win32-x86_64
+				\eclipse\workspace\JavaStudy\Spring帝国\SpringMVC
+				\springMVC-jdbc-web\webapp\upload
+			</location>
+			<!-- 上传文件的大小 -->
+			<max-file-size>1048756</max-file-size>
+			<!-- 单次请求中上传文件的大小 -->
+			<max-request-size>1048756</max-request-size>
+			<!-- 将上传的文件写入磁盘后的大小阈值 -->
+			<file-size-threshold>10240</file-size-threshold>
+		</multipart-config>
 	</servlet>
 
 	<!-- Map all requests to the DispatcherServlet for handling -->

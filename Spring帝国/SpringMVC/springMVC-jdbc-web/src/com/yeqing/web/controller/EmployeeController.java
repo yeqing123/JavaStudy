@@ -3,13 +3,14 @@ package com.yeqing.web.controller;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,8 @@ public class EmployeeController {
 		if(id != null) {
 			Employee e = service.get(id);
 			m.addAttribute("e", e);
+		} else {
+			m.addAttribute("e", new Employee());  //如果使用的是springMVC自带的表单，就要设置一个空的domain对象
 		}
 		return "/employee/edit";
 	}
@@ -50,9 +53,9 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("/saveOrUpdate")
-	public String saveOrUpdate(Model m, @Validated Employee e, BindingResult bindingResult) {
+	public String saveOrUpdate(Model m, @Valid Employee e, BindingResult bindingResult) {
 		List<ObjectError> errors = bindingResult.getAllErrors();
-		if(errors.size() >= 0) {
+		if(errors.size() > 0) {
 			m.addAttribute("errors", errors);
 			return "/employee/edit";
 		}

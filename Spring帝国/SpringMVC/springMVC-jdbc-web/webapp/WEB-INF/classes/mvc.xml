@@ -21,10 +21,16 @@
 		    -->
 			<mvc:mapping path="/**"/>   
 			<mvc:exclude-mapping path="/login"/>  <!-- 对于/login的请求，不需要拦截，否则无法正确登录 -->
+			<mvc:exclude-mapping path="/upload"/> 
+			<mvc:exclude-mapping path="/download"/> 
 			<bean class="com.yeqing.interceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
+	<!-- 配置文件上传解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1048576"/>
+	</bean>
 	
 	
 </beans>

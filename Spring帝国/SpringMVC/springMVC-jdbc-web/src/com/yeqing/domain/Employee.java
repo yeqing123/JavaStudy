@@ -7,13 +7,14 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Data;
 
 
 
 //封装了数据库springmvcdemo中表employee中的数据
-@Setter@Getter
+@Data
 public class Employee {
 	private Long id;
 	@NotNull(message = "用户名不能为空")
@@ -24,9 +25,7 @@ public class Employee {
 	@Max(value = 60, message = "年龄最大为60")
 	private Integer age;
 	@NotNull(message = "雇佣日期不能为空")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date hiredate;
 
-	public String toString() {
-		return "Employee [id=" + id + ", username=" + username + ", age=" + age + ", hiredate=" + hiredate.toLocaleString() + "]";
-	}
 }
