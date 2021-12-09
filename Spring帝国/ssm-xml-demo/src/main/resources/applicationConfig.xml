@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 配置连接数据库的资源文件 -->
+	<context:property-placeholder location="classpath:db.properties" system-properties-mode="NEVER"/>
+
+	<!-- 配置数据库连接池 -->
+	<bean id="myDataSource"
+		class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="driverClassName"
+			value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+	</bean>
+
+	<!-- 
+		Spring和Mybatis的整合配置:
+		1:配置SqlSessionFactoryBean
+	 -->
+	<bean id="sqlSessionFactoryBean"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- a:关联数据库连接池 -->
+		<property name="dataSource" ref="myDataSource" />
+		<!-- b:配置Mybatis属性配置 -->
+		<property name="configurationProperties">
+			<value>
+				lazyLoadingEnabled=true
+				lazyLoadTriggerMethods=clone
+				aggressiveLazyLoading=false
+			</value>
+		</property>
+		<!-- c:为哪个包中类起别名 -->
+		<property name="typeAliasesPackage" value="com.yeqing.ssm.domain"/>
+		<!-- d:关联映射文件 -->
+		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
+	</bean>
+	
+	<!-- 2:配置MapperFactoryBean -->
+	<bean id="mapperFactoryBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+		<property name="mapperInterface" value="com.yeqing.ssm.mapper.UserMapper"/>
+	</bean>
+	
+	<!-- 配置Service对象 -->
+	<bean id="userService" class="com.yeqing.ssm.service.impl.UserServiceImpl">
+		<property name="userMapper" ref="mapperFactoryBean"/>
+	</bean>
+	
+	
+<!-- ======================================================================================= -->
+	<!-- 配置事务管理器 -->
+	<bean id="txManger"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="myDataSource"/>
+	</bean>
+
+	<!-- 配置事务增强（WHAT） -->
+	<tx:advice id="txAdvice" transaction-manager="txManger">
+		<!-- 配置在哪个包中的哪个方法里执行事务（WHERE） -->
+		<tx:attributes>
+			<!-- 执行查询操作时设置为只读事务 -->
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<!-- 执行非查询操作时，为非只读事务 -->
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 配置执行事务增强的时机（WHEN） -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.yeqing.ssm.service..*Service.*(..))" id="txPointcut" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+	</aop:config>
+	
+</beans>
