@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.yeqing.ssm.mapper.UserMapper">
+
+	<insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO t_user(name, age, born_date, head_img) VALUES(#{name}, #{age}, #{bornDate}, #{headImg})
+	</insert>  	
+	
+	<delete id="deleteById" parameterType="java.lang.Long">
+		DELETE FROM t_user WHERE id = #{id}
+	</delete>
+	
+	<update id="updateById" parameterType="User">
+		UPDATE t_user SET name=#{name}, age=#{age}, born_date=#{bornDate}, head_img=#{headImg} WHERE id = #{id}
+	</update>
+	
+	<!-- 配置查询结果与模型对象的映射 -->
+	<resultMap type="User" id="baseResultMap">
+		<id column="id" property="id"/>
+		<result column="age" property="age"/>
+		<result column="born_date" property="bornDate"/>
+		<result column="head_img" property="headImg"/>
+	</resultMap>
+	
+	<select id="selectById" resultMap="baseResultMap">
+		SELECT id, name, age, born_date, head_img FROM t_user WHERE id = #{id}	
+	</select>
+	
+	<select id="selectAll" resultMap="baseResultMap">
+		SELECT id, name, age, born_date, head_img FROM t_user
+	</select>
+  </mapper>

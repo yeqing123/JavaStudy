@@ -1,10 +1,10 @@
-package com.yeqing.ssm.dao;
+package com.yeqing.ssm.mapper;
 
 import java.util.List;
 
 import com.yeqing.ssm.domain.User;
 
-public interface IUserDAO {
+public interface UserMapper {
 	int insert(User u);
 
 	void deleteById(Long id);

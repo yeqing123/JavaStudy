@@ -4,5 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-
+	<!-- 开启延迟加载 -->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="lazyLoadTriggerMethods" value="clone"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+	</settings>
+	
+	<!-- 配置别名 -->
+	<typeAliases>
+		<package name="com.yeqing.ssm"/>
+	</typeAliases>
+	
+	<!-- 配置映射文件 -->
+	<mappers>
+		<mapper resource="mapper/UserMapper.xml"/>
+	</mappers>
 </configuration>
