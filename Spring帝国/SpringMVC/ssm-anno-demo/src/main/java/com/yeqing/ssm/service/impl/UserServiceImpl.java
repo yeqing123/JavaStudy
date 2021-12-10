@@ -22,7 +22,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public void save(User u) {
 		userMapper.insert(u);
-		int a = 1 / 0;
+		//int a = 1 / 0;
 	}
 
 	@Override
