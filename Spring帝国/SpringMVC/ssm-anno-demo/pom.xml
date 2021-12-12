@@ -116,6 +116,23 @@
 			<artifactId>apache-jstl</artifactId>
 			<version>9.4.0.v20180619</version>
 		</dependency>
+		<!-- 用于文件上传 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<!-- imageio:图片处理组件 -->
+		<dependency>
+			<groupId>com.twelvemonkeys.imageio</groupId>
+			<artifactId>imageio-jpeg</artifactId>
+			<version>3.4.1</version>
+		</dependency>
 
 	</dependencies>
 

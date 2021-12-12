@@ -25,6 +25,6 @@ public class AppTest {
 	}
 	@Test
 	public void testTransaction() throws Exception {
-		userService.save(new User(null, "bbb", 10, new Date(), ""));
+		userService.save(new User(null, "bbb", 10, new Date(), "", ""));
 	}
 }

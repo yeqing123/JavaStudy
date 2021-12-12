@@ -16,6 +16,7 @@
 <body>
 	<h2>用户信息列表</h2>
 	<a href="/user/input">Add new user</a>
+	当前登录用户：${user_in_session.name}<a href="/logout">Logout</a>
 	<table border="1" cellspacing="0" cellpadding="10" width="80%">
 		<tr>
 			<th>ID</th>
@@ -31,7 +32,7 @@
 				<td>${u.name}</td>
 				<td>${u.age}</td>
 				<td><fmt:formatDate value="${u.bornDate}" pattern="yyyy-MM-dd"/></td>
-				<td>${u.headImg}</td>
+				<td><img src="${u.headImg}"></td>
 				<td><a href="/user/delete?id=${u.id}" onclick="return confirmDel()">DELETE</a></td>
 				<td><a href="/user/input?id=${u.id}">UPDATE</a></td>
 			</tr>

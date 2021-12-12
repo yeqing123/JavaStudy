@@ -18,4 +18,5 @@ public class User {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date bornDate;
 	private String headImg;
+	private String password;
 }

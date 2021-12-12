@@ -4,7 +4,7 @@
 
 <mapper namespace="com.yeqing.ssm.mappers.UserMapper">
 	<insert id="insert" parameterType="User">
-		INSERT INTO t_user(name, age, born_date, head_img) VALUES(#{name}, #{age}, #{bornDate}, #{headImg})
+		INSERT INTO t_user(name, age, born_date, head_img, password) VALUES(#{name}, #{age}, #{bornDate}, #{headImg}, #{password})
 	</insert>
 	
 	<delete id="deleteById" parameterType="java.lang.Long">
@@ -12,7 +12,7 @@
 	</delete>
 	
 	<update id="updateById" parameterType="User">
-		UPDATE t_user SET name=#{name}, age=#{age}, born_date=#{bornDate}, head_img=#{headImg} WHERE id=#{id}
+		UPDATE t_user SET name=#{name}, age=#{age}, born_date=#{bornDate}, head_img=#{headImg}, password=#{password} WHERE id=#{id}
 	</update>
 	
 	<!-- 结果映射 -->
@@ -22,13 +22,18 @@
 		<result column="age" property="age"/>
 		<result column="born_date" property="bornDate"/>
 		<result column="head_img" property="headImg"/>
+		<result column="password" property="password"/>
 	</resultMap>
 	
 	<select id="selectById" resultMap="baseResultMap">
-		SELECT id, name, age, born_date, head_img FROM t_user WHERE id=#{id}
+		SELECT id, name, age, born_date, head_img, password FROM t_user WHERE id=#{id}
 	</select>
 	
 	<select id="selectAll" resultMap="baseResultMap">
-		SELECT id, name, age, born_date, head_img FROM t_user
+		SELECT id, name, age, born_date, head_img, password FROM t_user
+	</select>
+	
+	<select id="checkLogin" resultMap="baseResultMap">
+		SELECT id, name, age, born_date, head_img, password FROM t_user WHERE name=#{name} AND password=#{password}
 	</select>
 </mapper>

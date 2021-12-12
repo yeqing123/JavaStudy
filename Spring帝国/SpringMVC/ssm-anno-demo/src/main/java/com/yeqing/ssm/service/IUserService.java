@@ -14,4 +14,6 @@ public interface IUserService {
 	User get(Long id);
 
 	List<User> listAll();
+	
+	void login(String name, String password);
 }

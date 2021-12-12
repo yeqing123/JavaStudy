@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yeqing.ssm.domain.User;
 import com.yeqing.ssm.mappers.UserMapper;
 import com.yeqing.ssm.service.IUserService;
+import com.yeqing.ssm.util.UserContext;
 
 @Service
 @EnableTransactionManagement
@@ -43,6 +44,16 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<User> listAll() {
 		return userMapper.selectAll();
+	}
+
+	@Override
+	public void login(String name, String password) {
+		User current = userMapper.checkLogin(name, password);
+		if(current != null) {
+			UserContext.setCurrentUser(current);
+		}else {
+			throw new  RuntimeException("输入的用户名或密码错误");
+		}
 	}
 
 }

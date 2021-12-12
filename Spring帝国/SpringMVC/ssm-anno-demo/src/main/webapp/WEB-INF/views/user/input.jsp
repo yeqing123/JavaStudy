@@ -8,12 +8,13 @@
 </head>
 <body>
 	<h2>编辑用户信息</h2>
-	<form action="/user/saveOrUpdate" method="POST">
+	<form action="/user/saveOrUpdate" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="${u.id}"/><br/>
 		姓名：<input type="text" name="name" value="${u.name}"/><br/>
 		年龄：<input type="text" name="age" value="${u.age}"/><br/>
 		生日：<input type="date" id="born" name="bornDate" value='<fmt:formatDate value="${u.bornDate}" pattern="yyyy-MM-dd"/>'/><br/>
-		头像：<input type="image" name="headImg" value="${u.headImg}"/><br/>
+		头像：<img src="${u.headImg}"/>
+		上传头像<input type="file" name="img"><br/>
 		<input type="submit" value="提交"/>
 	</form>
 </body>
