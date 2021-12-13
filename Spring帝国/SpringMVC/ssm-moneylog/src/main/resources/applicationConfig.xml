@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- 配置IoC注解解析器 -->
-	<context:component-scan base-package="com.yeqing.ssm.service"/>
+	<context:component-scan base-package="com.yeqing.moneylog.service"/>
 	<!-- 配置DI注解解析器 -->
 	<context:annotation-config/>
 	<!-- 配置事务注解解析器 -->
@@ -28,10 +28,17 @@
 		<property name="initialSize" value="${jdbc.initialSize}"/>
 	</bean>
 	
-	<!-- 配置SqlSessionFactoryBean -->
+	<!-- 配置事务管理器 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="myDataSource"/>
+	</bean>
+	
+<!-- ===========================通过配置，建立spring与mybatis的整合=============================== -->
+
+	<!-- 配置SqlSessionFactoryBean，让spring帮我们管理与mybatis相关的配置 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource"/>
-		<!-- 配置mybatis的配置属性 -->
+		<!-- 配置与mybatis相关的属性 -->
 		<property name="configurationProperties">
 			<value>
 				lazyLoadingEnabled=true
@@ -39,20 +46,18 @@
 				lazyLoadTriggerMethods=clone
 			</value>
 		</property>
-		<!-- 配置给哪个包中的类起别名 -->
-		<property name="typeAliasesPackage" value="com.yeqing.ssm.domain"/>
-		<!-- 配置User对象的映射文件 -->
-		<property name="mapperLocations" value="classpath:mappers/*Mapper.xml"/>
+		<!-- 加载映射文件 -->
+		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
+		<!-- 配置在哪个包中使用类型别名 -->
+		<property name="typeAliasesPackage" value="com.yeqing.moneylog.domain"/>
 	</bean>
 	
-	<!-- 配置MapperFactoryBean -->
-	<bean id="mapperFactory" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<!-- 配置MapperFactoryBean，让spring帮我们管理接口映射 -->
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.yeqing.moneylog.mapper.MoneyLogMapper"/>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-		<property name="mapperInterface" value="com.yeqing.ssm.mappers.UserMapper"/>
 	</bean>
 	
-	<!-- 配置事务管理器 -->
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="myDataSource"/>
-	</bean>
+<!-- ======================================================================================== -->
+	
 </beans>
