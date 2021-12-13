@@ -13,7 +13,7 @@
 		姓名：<input type="text" name="name" value="${moneylog.name}"/><br/>
 		时间：<input type="date" name="actionDate" value="<fmt:formatDate value="${moneylog.actionDate}" pattern="yyyy-MM-dd"/>"/><br/>
 		地点：<input type="text" name="locale" value="${moneylog.locale}"/><br/>
-		事由：<textarea name="event" cols="15" rows="4" style="resize: none;">${moneylog.event}</textarea><br/>
+		<span style="vertical-align:top;">事由：</span><textarea name="event" cols="50" rows="4" style="resize: none;">${moneylog.event}</textarea><br/>
 		支出金额：<input type="number" name="money" value="${moneylog.money}"/><br/>
 		<input type="submit" value="保存"/>
 	</form>

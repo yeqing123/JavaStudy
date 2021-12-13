@@ -7,12 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function confirmDel() {
+		return confirm("是否确定删除？");
+	}
+</script>
 </head>
 <body>
 	<h2>写礼支出信息列表</h2>
 	<a href="/moneylog/input">新增</a>
 	<table border="1" width="80%" cellpadding="10" cellspacing="0">
-		<tr>
+		<tr style="background-color: orange;">
 			<th>编号</th>
 			<th>姓名</th>
 			<th>时间</th>
@@ -21,15 +26,17 @@
 			<th>支出金额</th>
 			<th>操作</th>
 		</tr>
-		<c:forEach items="${all}" var="ml">
-			<tr>
+		<c:forEach items="${all}" var="ml" varStatus="vs">
+			<tr style="background-color:${vs.count%2==0?'gray':''};">
 				<td>${ml.id}</td>
 				<td>${ml.name}</td>
-				<td><fmt:formatDate value="${ml.actionDate}" pattern="yyyy-MM-dd"/></td>
+				<td><fmt:formatDate value="${ml.actionDate}"
+						pattern="yyyy-MM-dd" /></td>
 				<td>${ml.locale}</td>
 				<td>${ml.event}</td>
-				<td>${ml.money}</td>
-				<td><a href="/moneylog/delete?id=${ml.id}">删除</a>&nbsp;<a href="/moneylog/input?id=${ml.id}">编辑</a></td>
+				<td>${ml.money}元</td>
+				<td><a href="/moneylog/delete?id=${ml.id}" onclick="return confirmDel()">删除</a>&nbsp;<a
+					href="/moneylog/input?id=${ml.id}">编辑</a></td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -12,7 +12,7 @@
 	</delete>
 	
 	<update id="updateById" parameterType="MoneyLog">
-		UPDATE money_log SET name=#{name}, date=#{action_date}, locale=#{locale}, event=#{event}, money=#{money} WHERE id=#{id}
+		UPDATE money_log SET name=#{name}, action_date=#{actionDate}, locale=#{locale}, event=#{event}, money=#{money} WHERE id=#{id}
 	</update>
 	
 	<!-- 结果映射 -->
