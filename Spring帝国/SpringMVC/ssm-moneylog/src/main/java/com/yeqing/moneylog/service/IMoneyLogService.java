@@ -3,6 +3,7 @@ package com.yeqing.moneylog.service;
 import java.util.List;
 
 import com.yeqing.moneylog.domain.MoneyLog;
+import com.yeqing.moneylog.query.QueryObject;
 
 public interface IMoneyLogService {
 
@@ -15,4 +16,6 @@ public interface IMoneyLogService {
 	MoneyLog get(Long id);
 
 	List<MoneyLog> listAll();
+
+	List<MoneyLog> query(QueryObject qo);
 }
