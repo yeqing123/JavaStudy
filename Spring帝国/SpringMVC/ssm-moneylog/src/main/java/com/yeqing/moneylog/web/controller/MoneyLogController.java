@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +13,7 @@ import com.yeqing.moneylog.query.QueryObject;
 import com.yeqing.moneylog.service.IMoneyLogService;
 
 //处理写礼支出相关请求的控制器
-@Controller
+//@Controller
 @RequestMapping("/moneylog")
 public class MoneyLogController {
 
@@ -50,7 +49,7 @@ public class MoneyLogController {
 	}
 	//处理高级查询请求
 	@RequestMapping("/query")
-	public String query(String cmd, QueryObject qo, Model model) {
+	public String query(QueryObject qo, Model model) {
 		//首先判断查询条件中的字符串是否为空字符串，如果为空字符串就设置为null
 		if(isEmptyString(qo.getName())) {
 			qo.setName(null);

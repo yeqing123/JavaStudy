@@ -16,7 +16,7 @@
 <body>
 	<h2>写礼支出信息列表</h2>
 	<a href="/moneylog/input">新增</a><br/> 
-	<form action="/moneylog/query" method="POST">
+	<form action="/moneylog?cmd=query" method="POST">
 			姓名：<input type="text" name="name" value="${qo.name}" style="width: 80px;" />&nbsp; 
 			时间区间：从<input type="date" name="startDate" value='<fmt:formatDate value="${qo.startDate}" pattern="yyyy-MM-dd"/>'/>
 			到<input type="date" name="endDate" value='<fmt:formatDate value="${qo.endDate}" pattern="yyyy-MM-dd"/>' />&nbsp;
@@ -44,8 +44,8 @@
 					<td>${ml.locale}</td>
 					<td>${ml.event}</td>
 					<td>${ml.money}元</td>
-					<td><a href="/moneylog/query?cmd=delete&id=${ml.id}" onclick="return confirmDel()">删除</a>&nbsp;
-					    <a href="/moneylog/query?cmd=delete&id=${ml.id}">编辑</a>
+					<td><a href="/moneylog?cmd=delete&id=${ml.id}" onclick="return confirmDel()">删除</a>&nbsp;
+					    <a href="/moneylog?cmd=input&id=${ml.id}">编辑</a>
 					</td>
 				</tr>
 			</c:forEach>
