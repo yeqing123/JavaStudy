@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h2>编辑写礼支出信息</h2>
-	<form action="/moneylog?cmd=saveOrUpdate" method="POST">
+	<form action="/moneylog/saveOrUpdate" method="POST">
 		<input type="hidden" name="id" value="${moneylog.id}"/><br/>
 		姓名：<input type="text" name="name" value="${moneylog.name}"/><br/>
 		时间：<input type="date" name="actionDate" value="<fmt:formatDate value="${moneylog.actionDate}" pattern="yyyy-MM-dd"/>"/><br/>

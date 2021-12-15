@@ -1,6 +1,5 @@
 package com.yeqing.moneylog.web.controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -23,23 +22,24 @@ public class MoneyLogController2 implements Controller {
 	@Autowired
 	private IMoneyLogService service;
 
+	//调用不同的方法，处理不同类型的请求
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String cmd = request.getParameter("cmd");
 		System.out.println("cmd: " + cmd);
 		if("saveOrUpdate".equals(cmd)) {
-			return saveOrUpdate(request, response);
+			return saveOrUpdate(request);
 		}
 		if("delete".equals(cmd)) {
-			return delete(request, response);
+			return delete(request);
 		}
 		if("input".equals(cmd)) {
-			return input(request, response);
+			return input(request);
 		} else {
-			return query(request, response);
+			return query(request);
 		}
 	}
-	
-	private ModelAndView input(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	//处理用户新增或编辑请求，跳转到编辑页面
+	private ModelAndView input(HttpServletRequest request) throws Exception {
 		String idStr = request.getParameter("id");
 		ModelAndView mv = new ModelAndView();
 		if(idStr != null) {
@@ -49,42 +49,34 @@ public class MoneyLogController2 implements Controller {
 		mv.setViewName("moneylog/input");
 		return mv;
 	}
-
-	private ModelAndView saveOrUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	//保存或修改信息
+	private ModelAndView saveOrUpdate(HttpServletRequest request) throws Exception {
 		MoneyLog ml = parametersToMoneyLog(request);
 		if(ml.getId() == null) {
 			service.save(ml);
 		} else {
 			service.update(ml);
 		}
-		return query(request, response);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/moneylog");  //注意：这里一定要用重定向
+		return mv;
 	}
-	private ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	//处理删除信息的请求
+	private ModelAndView delete(HttpServletRequest request) throws Exception {
 		String idStr = request.getParameter("id");
 		service.delete(Long.valueOf(idStr));
-		return query(request, response);
+		return query(request);
 	}
-	private ModelAndView query(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		QueryObject qo = (QueryObject) request.getSession().getAttribute("qo_in_session");
-		if(qo == null) {
-			qo = parametersToQueryObject(request);
-			request.getSession().setAttribute("qo_in_session", qo);
-		}
-		System.out.println("qo: " + qo);
+	//处理查询（包含高级+分页查询）请求
+	private ModelAndView query(HttpServletRequest request) throws Exception {
+		QueryObject qo = parametersToQueryObject(request);
+		System.out.println("query() --> qo: " + qo);
 		List<MoneyLog> list = service.query(qo);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);
-		mv.setViewName("moneylog/list");
+		mv.addObject("qo", qo);
+		mv.setViewName("moneylog/list2");
 		return mv;
-	}
-	private ModelAndView list(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		QueryObject qo = (QueryObject) request.getSession().getAttribute("qo_in_session");
-		ModelAndView mv = new ModelAndView();
-		if(qo == null) {
-			mv.addObject("list", service.listAll());
-		} else {
-			mv.addObject("list", query())
-		}
 	}
 	
 	private boolean hasLength(String str) {
@@ -100,7 +92,16 @@ public class MoneyLogController2 implements Controller {
 		String minMoneyStr = request.getParameter("minMoney");
 		String maxMoneyStr = request.getParameter("maxMoney");
 		String keyword = request.getParameter("keyword");
-		qo.setName(name);
+		if(hasLength(name)) {
+			qo.setName(name);
+		} else {
+			qo.setName(null);
+		}
+		if(hasLength(keyword)) {
+			qo.setKeyword(keyword);
+		} else {
+			qo.setKeyword(null);
+		}
 		if(hasLength(startDateStr)) {
 			qo.setStartDate(sdf.parse(startDateStr));
 		}else {
@@ -121,10 +122,9 @@ public class MoneyLogController2 implements Controller {
 		}else {
 			qo.setMaxMoney(null);
 		}
-		qo.setKeyword(keyword);
 		return qo;
 	}
-	//获取input.jsp页面所有参数，将它封装成一个MoneyLog对象
+	//获取input.jsp页面的参数，将它封装成一个MoneyLog对象
 	private MoneyLog parametersToMoneyLog(HttpServletRequest request) throws Exception {
 		MoneyLog ml = new MoneyLog();
 		String name = request.getParameter("name");

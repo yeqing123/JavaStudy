@@ -5,22 +5,24 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.yeqing.moneylog.domain.MoneyLog;
+import com.yeqing.moneylog.page.PageIndex;
 import com.yeqing.moneylog.query.QueryObject;
 import com.yeqing.moneylog.service.IMoneyLogService;
 
 //处理写礼支出相关请求的控制器
-//@Controller
+@Controller
 @RequestMapping("/moneylog")
 public class MoneyLogController {
 
 	@Autowired
 	private IMoneyLogService moneyLogService;
-	@Autowired
-	private ServletContext servletContext;
 	
 	//添加新的支出信息，后者修改已由的支出信息
 	@RequestMapping("/saveOrUpdate")
@@ -30,7 +32,7 @@ public class MoneyLogController {
 		} else {
 			moneyLogService.save(ml);
 		}
-		return "moneylog/query";
+		return "redirect:/moneylog/query";
 	}
 	//处理用户发出的编辑或新增请求
 	@RequestMapping("/input")
@@ -45,7 +47,7 @@ public class MoneyLogController {
 	@RequestMapping("/delete")
 	public String delete(Long id) {
 		moneyLogService.delete(id);
-		return "moneylog/list";
+		return "redirect:/moneylog/query";
 	}
 	//处理高级查询请求
 	@RequestMapping("/query")
@@ -57,10 +59,14 @@ public class MoneyLogController {
 		if(isEmptyString(qo.getKeyword())) {
 			qo.setKeyword(null);
 		}
+		PageHelper.startPage(qo.getCurrentPage(), qo.getPageSize()); //使用mybatis的PageHelper插件，实现分页查询
 		System.out.println(qo);
 		List<MoneyLog> list = moneyLogService.query(qo);
+		PageInfo<MoneyLog> pageInfo = new PageInfo<>(list);  //包装成一个PageInfo，它包含了分页的信息
+		PageIndex pageIndex = PageIndex.getPageIndex(3, pageInfo.getPageNum(), pageInfo.getPages());
 		model.addAttribute("list", list);
-		servletContext.setAttribute("qo", qo);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("pageIndex", pageIndex);
 		return "moneylog/list";
 	}
 	//判断字符串是否为空字符串

@@ -42,7 +42,7 @@
 	</select>
 
 	<!-- 高级查询 -->
-	<select id="query" resultMap="baseResultMap">
+	<select id="query" resultMap="baseResultMap" parameterType="PageInfo">
 		SELECT id, name, action_date, locale, event, money FROM money_log
 		<where>
 			<if test="name!=null">
@@ -62,7 +62,11 @@
 			</if>
 			<if test="keyword!=null">
 				<bind name="pattern" value="'%'+keyword+'%'" />
-				AND (name LIKE #{pattern} OR locale LIKE #{pattern} OR event LIKE #{pattern})
+				AND (name LIKE #{pattern} OR locale LIKE #{pattern} OR event LIKE
+				#{pattern})
+			</if>
+			<if test="pageSize>0">
+				LIMIT #{startRow}, #{pageSize}
 			</if>
 		</where>
 	</select>
