@@ -2,8 +2,6 @@ package com.yeqing.moneylog.web.controller;
 
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,10 +59,8 @@ public class MoneyLogController {
 		}
 		PageHelper.startPage(qo.getCurrentPage(), qo.getPageSize()); //使用mybatis的PageHelper插件，实现分页查询
 		System.out.println(qo);
-		List<MoneyLog> list = moneyLogService.query(qo);
-		PageInfo<MoneyLog> pageInfo = new PageInfo<>(list);  //包装成一个PageInfo，它包含了分页的信息
+		PageInfo<MoneyLog> pageInfo = moneyLogService.query(qo);
 		PageIndex pageIndex = PageIndex.getPageIndex(3, pageInfo.getPageNum(), pageInfo.getPages());
-		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("pageIndex", pageIndex);
 		return "moneylog/list";

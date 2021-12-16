@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.yeqing.moneylog.domain.MoneyLog;
 import com.yeqing.moneylog.mapper.MoneyLogMapper;
 import com.yeqing.moneylog.query.QueryObject;
@@ -39,17 +41,24 @@ public class AppTest {
 	@Test
 	public void testQuery() throws Exception {
 		QueryObject qo = new QueryObject();
-		//qo.setMinMoney(100);
-		//qo.setMaxMoney(500);
+		qo.setMinMoney(500);
+		qo.setMaxMoney(1000);
 		//qo.setKeyword("叶");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		qo.setStartDate(sdf.parse("2021-1-1"));
-		qo.setEndDate(sdf.parse("2021-5-31"));
+//		qo.setStartDate(sdf.parse("2021-1-1"));
+//		qo.setEndDate(sdf.parse("2021-5-31"));
+		PageHelper.startPage(3, 8);
 		System.out.println(qo);
 		List<MoneyLog> list = mapper.query(qo);
-		for (MoneyLog moneyLog : list) {
+		PageInfo<MoneyLog> pageInfo = new PageInfo<>(list);
+		System.out.println("rowTotal: " + pageInfo.getTotal());
+		for (MoneyLog moneyLog : pageInfo.getList()) {
 			System.out.println(moneyLog);
 		}
+		System.out.println("currentPage: " + pageInfo.getPageNum() + "/" + pageInfo.getPages());
+		System.out.println("previousPage: " + pageInfo.getPrePage());
+		System.out.println("nextPage: " + pageInfo.getNextPage());
+		
 	}
 	
 }

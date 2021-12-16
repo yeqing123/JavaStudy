@@ -2,6 +2,7 @@ package com.yeqing.moneylog.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.yeqing.moneylog.domain.MoneyLog;
 import com.yeqing.moneylog.query.QueryObject;
 
@@ -17,5 +18,5 @@ public interface IMoneyLogService {
 
 	List<MoneyLog> listAll();
 
-	List<MoneyLog> query(QueryObject qo);
+	PageInfo<MoneyLog> query(QueryObject qo);
 }

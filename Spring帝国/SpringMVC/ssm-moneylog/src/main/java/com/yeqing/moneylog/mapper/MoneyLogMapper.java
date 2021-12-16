@@ -2,6 +2,7 @@ package com.yeqing.moneylog.mapper;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.yeqing.moneylog.domain.MoneyLog;
 import com.yeqing.moneylog.query.QueryObject;
 

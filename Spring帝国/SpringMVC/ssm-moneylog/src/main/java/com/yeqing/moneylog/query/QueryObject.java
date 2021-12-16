@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
-//封装了高级查询和分页查询的的基本条件
+//封装了高级查询的查询条件
 @Data
 public class QueryObject {
 	private String name;
@@ -19,13 +19,6 @@ public class QueryObject {
 	private Integer minMoney;
 	private Integer maxMoney;
 	private String keyword;
-	
-	private Integer currentPage = 1;  //用户想好跳转的页面，默认为首页
-	private Integer pageSize = 5;   //每页最多显示多少数据，默认为5
-	private Integer prePage;  //上页
-	private Integer nextPage; //下页
-	private Integer pageTotal; //末页
-	private Integer pageCount; //数据总数
 	
 	private List<Integer> pageList = Arrays.asList(new Integer[]{3,5,7,10});  //页面上可供选择的pageSize属性的值
 	
