@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.PageInfo;
 import com.yeqing.moneylog.domain.MoneyLog;
 import com.yeqing.moneylog.mapper.MoneyLogMapper;
 import com.yeqing.moneylog.query.QueryObject;
@@ -36,9 +35,8 @@ public class MoneyLogServiceImpl implements IMoneyLogService {
 	public List<MoneyLog> listAll() {
 		return mapper.selectAll();
 	}
-	public PageInfo<MoneyLog> query(QueryObject qo) {
-		List<MoneyLog> list = mapper.query(qo);
-		return new PageInfo<>(list);
+	public List<MoneyLog> query(QueryObject qo) {
+		return mapper.query(qo);
 	}
 
 }

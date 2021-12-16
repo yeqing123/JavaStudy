@@ -47,17 +47,18 @@ public class AppTest {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //		qo.setStartDate(sdf.parse("2021-1-1"));
 //		qo.setEndDate(sdf.parse("2021-5-31"));
-		PageHelper.startPage(3, 8);
+		PageHelper.startPage(7, 5);
 		System.out.println(qo);
 		List<MoneyLog> list = mapper.query(qo);
 		PageInfo<MoneyLog> pageInfo = new PageInfo<>(list);
-		System.out.println("rowTotal: " + pageInfo.getTotal());
 		for (MoneyLog moneyLog : pageInfo.getList()) {
 			System.out.println(moneyLog);
 		}
+		System.out.println("rowTotal: " + pageInfo.getTotal());
 		System.out.println("currentPage: " + pageInfo.getPageNum() + "/" + pageInfo.getPages());
 		System.out.println("previousPage: " + pageInfo.getPrePage());
 		System.out.println("nextPage: " + pageInfo.getNextPage());
+		System.out.println("pages: " + pageInfo.getPages());
 		
 	}
 	

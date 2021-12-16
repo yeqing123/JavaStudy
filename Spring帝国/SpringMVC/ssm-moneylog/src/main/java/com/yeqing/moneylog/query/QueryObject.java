@@ -20,7 +20,10 @@ public class QueryObject {
 	private Integer maxMoney;
 	private String keyword;
 	
-	private List<Integer> pageList = Arrays.asList(new Integer[]{3,5,7,10});  //页面上可供选择的pageSize属性的值
+	private Integer currentPage = 1;  //The page than user wants to jump to. By default 1
+	private Integer pageSize = 5;     //How many pieces of data per page. By default 5
+	
+	private List<Integer> pageSizeList = Arrays.asList(new Integer[]{3,5,7,10});  //页面上可供选择的pageSize属性的值
 	
 	public String getName() {
 		return emtpy2null(name);

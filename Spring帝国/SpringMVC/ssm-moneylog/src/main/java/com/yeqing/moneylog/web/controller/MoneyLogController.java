@@ -47,7 +47,7 @@ public class MoneyLogController {
 		moneyLogService.delete(id);
 		return "redirect:/moneylog/query";
 	}
-	//处理高级查询请求
+	//处理高级查询和分页查询请求(使用PageHelper插件，实现分页查询)
 	@RequestMapping("/query")
 	public String query(QueryObject qo, Model model) {
 		//首先判断查询条件中的字符串是否为空字符串，如果为空字符串就设置为null
@@ -57,12 +57,13 @@ public class MoneyLogController {
 		if(isEmptyString(qo.getKeyword())) {
 			qo.setKeyword(null);
 		}
-		PageHelper.startPage(qo.getCurrentPage(), qo.getPageSize()); //使用mybatis的PageHelper插件，实现分页查询
-		System.out.println(qo);
-		PageInfo<MoneyLog> pageInfo = moneyLogService.query(qo);
+		PageHelper.startPage(qo.getCurrentPage(), qo.getPageSize());
+		List<MoneyLog> list = moneyLogService.query(qo);
+		PageInfo<MoneyLog> pageInfo = new PageInfo<>(list);  //PageInfo object encapsulated the result set and page information.
 		PageIndex pageIndex = PageIndex.getPageIndex(3, pageInfo.getPageNum(), pageInfo.getPages());
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("pageIndex", pageIndex);
+		model.addAttribute("qo", qo);
 		return "moneylog/list";
 	}
 	//判断字符串是否为空字符串

@@ -57,6 +57,8 @@
 					<property name="properties">
 						<value>
 							helperDialect=mysql
+							pageSizeZero=true
+							reasonable=true
 						</value>
 					</property>
 				</bean>

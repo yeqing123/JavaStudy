@@ -29,7 +29,7 @@
    	<a href="javascript: go(${pageInfo.pages});">末页</a>&nbsp;&nbsp;
    	一共查询到${pageInfo.total}条数据，每页最多显示
    	<select name="pageSize">
-   		<c:forEach items="${qo.pageList}" var="ps">
+   		<c:forEach items="${qo.pageSizeList}" var="ps">
    			<option value="${ps}" ${ps==pageInfo.pageSize?"selected":""}>${ps}</option>
    		</c:forEach>
    	</select>
