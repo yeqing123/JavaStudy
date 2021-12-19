@@ -1,10 +1,10 @@
-package com.yeqing.helloworld;
+package com.yeqing;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HelloworldApplicationTests {
+class Springboot2ConfigApplicationTests {
 
 	@Test
 	void contextLoads() {
