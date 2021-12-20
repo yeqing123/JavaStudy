@@ -15,3 +15,5 @@ server:
   port: 8084
 spring:
   profiles: test
+
+debug: true
