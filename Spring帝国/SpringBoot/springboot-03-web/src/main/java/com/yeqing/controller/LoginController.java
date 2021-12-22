@@ -11,21 +11,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
-	@RequestMapping("/form_login")
+	@RequestMapping("/login")
 	public String checkLogin(
 			@RequestParam("username")String username, 
 			@RequestParam("password")String password, 
 			Model model,
 			HttpSession session) {
-		System.out.println("username:" + username + "password: " + password);
-		if(!StringUtils.hasLength(username) || !StringUtils.hasLength(password)) {
-			model.addAttribute("msg", "用户名和密码均不可为空");
-			return "extra-login";
-		}else if("yeqing".equals(username) && "1234".equals(password)) {
-			model.addAttribute("msg", "用户名或密码错误");
-			return 	"extra-login";
+		System.out.println("username: " + username + ", password: " + password);
+		if(StringUtils.hasLength(username) && "1234".equals(password)) {
+			//将登录用户添加到session中，用作登录验证
+			session.setAttribute("loginUser", username);
+			return "redirect:/main.html";
 		}else {
-			return "index";
+			model.addAttribute("msg", "用户名或密码错误");
+			return "/login.html";
 		}
 	}
 }
