@@ -17,7 +17,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 		}else {
 			System.out.println("LoginHandlerInterceptor.preHandle()==>" + request.getRequestURI());
 			request.setAttribute("msg", "没有访问权限，请先登录");
-			request.getRequestDispatcher("login.html").forward(request, response);
+			request.getRequestDispatcher("goBackLogin").forward(request, response);
 			return false;
 		}
 	}
