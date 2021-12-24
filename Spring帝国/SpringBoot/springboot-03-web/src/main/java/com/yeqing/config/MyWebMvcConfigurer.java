@@ -20,13 +20,14 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		//不知道为什么，在拦截器LoginHendlerInterceptor中执行请求转发时不能直接转发到login.html，必须要在这里进行处理，否则会报404
 		registry.addViewController("/goBackLogin").setViewName("/login.html");  
 		registry.addViewController("/loginLanguage").setViewName("/login.html");
+		registry.addViewController("/yeqing").setViewName("/");
 	}
 
 	// 添加一个登录检查拦截器
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginHandlerInterceptor()) //
 				.addPathPatterns("/**") //
-				.excludePathPatterns("/", "/login", "/goBackLogin", "/loginLanguage", "/login.html", "/index.html", "/css/**", "/js/**", "/images/**", "/fonts/**");
+				.excludePathPatterns("/", "/login", "/goBackLogin", "/loginLanguage", "/login.html", "/css/**", "/js/**", "/images/**", "/fonts/**");
 	}
 	
 	@Bean  //将MyLocaleResolver作为Bean交给spring帮我们管理

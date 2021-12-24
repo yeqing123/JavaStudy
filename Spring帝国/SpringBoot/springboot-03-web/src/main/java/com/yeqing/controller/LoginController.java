@@ -17,6 +17,7 @@ public class LoginController {
 			@RequestParam("password")String password, 
 			Model model,
 			HttpSession session) {
+		
 		System.out.println("username: " + username + ", password: " + password);
 		if(StringUtils.hasLength(username) && "1234".equals(password)) {
 			//将登录用户添加到session中，用作登录验证
