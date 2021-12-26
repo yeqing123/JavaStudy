@@ -12,6 +12,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		Object loginUser = request.getSession().getAttribute("loginUser");
+		System.out.println("LoginHandlerInterceptor.preHandle()===>" + request.getRequestURI());
 		if(loginUser != null) {
 			return true;
 		}else {

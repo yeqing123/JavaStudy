@@ -63,7 +63,7 @@
 
 			</div>
 			<div class="login-body">
-				<form th:action="@{/login}" method="post">
+				<form th:action="@{/user/login}" method="post">
 					<input th:type="text" class="user" name="username" th:placeholder="#{login.username}" required> 
 					<input th:type="password" name="password" class="lock" th:placeholder="#{login.password}"> 
 					<input th:type="submit" name="Sign In" th:value="#{login.btn}">
@@ -92,8 +92,8 @@
 	</div>
     <hr/>
 	<div align="center">
-		<a th:href=@{/loginLanguage(l=zh_CN)}>中文</a>&nbsp;&nbsp;
-		<a th:href=@{/loginLanguage(l=en_US)}>English</a>
+		<a th:href=@{/login.html(l=zh_CN)}>中文</a>&nbsp;&nbsp;
+		<a th:href=@{/login.html(l=en_US)}>English</a>
 	</div>
 
 	<!-- Classie -->
